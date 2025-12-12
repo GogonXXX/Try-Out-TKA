@@ -2,8 +2,8 @@
   "name": "ASAS SDN YANTI — ExamBrowser",
   "short_name": "ASAS Exam",
   "description": "Aplikasi Ujian Terkunci untuk SD Negeri Yanti",
-  "start_url": ".",
-  "scope": ".",
+  "start_url": "https://gogonxxx.github.io/Try-Out-TKA/",
+  "scope": "https://gogonxxx.github.io/Try-Out-TKA/"
   "display": "standalone",
   "background_color": "#0e639c",
   "theme_color": "#0e639c",
