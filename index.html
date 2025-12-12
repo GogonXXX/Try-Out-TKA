@@ -11,9 +11,13 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <script>
+<script>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
+  // Jika di root: 'sw.js'
+  // Jika di subfolder: '/Try-Out-TKA/sw.js'
+  navigator.serviceWorker.register('sw.js')
+    .then(reg => console.log('SW registered:', reg))
+    .catch(err => console.log('SW registration failed:', err));
 }
 </script>
   
