@@ -11,6 +11,12 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/Try-Out-TKA/sw.js');
+}
+  </script>
+  
   <style>
     /* --- (keutuhan CSS dari file asli, sedikit penyesuaian untuk mode locked) --- */
     *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Arial,sans-serif}
