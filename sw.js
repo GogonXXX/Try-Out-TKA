@@ -1,9 +1,9 @@
 const CACHE_NAME = 'tryout-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/soal.json',
-  // tambahkan file lain yang diperlukan
+const urlsToCache = ['/Try-Out-TKA/',  // atau '/' jika di root domain
+  '/Try-Out-TKA/index.html',
+  '/Try-Out-TKA/soal.json',
+  '/Try-Out-TKA/sw.js',
+  '/Try-Out-TKA/manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
