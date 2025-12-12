@@ -19,15 +19,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "categories": ["education", "productivity"],
-  "shortcuts": [
-    {
-      "name": "Mulai Ujian",
-      "short_name": "Ujian",
-      "description": "Mulai ujian baru",
-      "url": "/Try-Out-TKA/?action=start",
-      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
-    }
   ]
 }
