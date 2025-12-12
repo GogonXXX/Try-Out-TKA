@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ASAS SD NEGERI YANTI — ExamBrowser Web</title>
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0e639c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <style>
+    /* --- (keutuhan CSS dari file asli, sedikit penyesuaian untuk mode locked) --- */
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Arial,sans-serif}
+    body{background:linear-gradient(135deg,#1e3c72 0%,#2a5298 100%);color:#333;line-height:1.6;padding:20px;min-height:100vh}
+    .container{max-width:1200px;margin:0 auto;background:white;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.2);overflow:hidden}
+    header{background:linear-gradient(135deg,#2d2d30 0%,#4a4a4f 100%);padding:20px;border-bottom:3px solid #0e639c;text-align:center;color:white}
+    h1{color:#fff;font-size:28px;margin-bottom:4px}
+    .subtitle{color:#cccccc;font-size:14px;font-weight:300}
+    .content{padding:22px}
+    .menu{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px;padding:18px;background:#f8f9fa;border-radius:8px;border:2px solid #e9ecef;align-items:center}
+    input[type="text"],input[type="number"],textarea{padding:8px;border-radius:6px;border:2px solid #ced4da;background:white;color:#495057;font-size:14px;transition:border-color .3s;width:100%}
+    button{background:#0e639c;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;transition:all .18s;font-weight:700}
+    .card{background:white;border-radius:10px;padding:18px;box-shadow:0 4px 15px rgba(0,0,0,.08);margin-bottom:15px;border:2px solid #e9ecef}
+    .time{font-weight:bold;color:#e11d48;margin-bottom:10px;font-size:18px;text-align:center;padding:8px;border-radius:8px;background:#fff5f5;border:2px solid #e11d48;}
+    .panel-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+    .panel-buttons button{width:44px;height:44px;border-radius:8px;border:2px solid #e6e6e6;background:white;color:#111;font-weight:700;cursor:pointer}
+    .panel-buttons button.answered{background:#ecfdf5;border-color:#bbf7d0;color:#166534}
+    .panel-buttons button.marked{background:#fffbeb;border-color:#fde68a;color:#92400e}
+    .panel-buttons button.current{background:#eff6ff;border-color:#bfdbfe;color:#0f4aa1}
+    .score-display{font-size:22px;font-weight:700;text-align:center;padding:12px;margin:12px 0;border-radius:8px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff}
+    .overlay-warning{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;color:white;padding:20px}
+    .overlay-box{background:#111; padding:20px;border-radius:10px;max-width:600px;text-align:center}
+    /* disable text selection for exam area */
+    .no-select { user-select: none; -webkit-user-select: none; -ms-user-select: none; }
+  </style>
+</head>
+<body class="no-select">
+
+  <div class="container" id="app">
+    <header>
+      <h1>ASESMENT SUMATIF AKHIR SEMESTER</h1>
+      <h1>SEKOLAH DASAR NEGERI YANTI</h1>
+      <p class="subtitle">Tahun Ajaran 2025/2026 — Mode Ujian Terkunci (Web Exam Browser)</p>
+    </header>
+
+    <div class="content">
+      <div class="menu">
+        <label style="width:220px">Nama Siswa:
+          <input id="namaSiswa" type="text" placeholder="Masukkan nama lengkap" style="width:220px;margin-left:8px">
+        </label>
+
+        <label>Waktu (menit):
+          <input id="setTime" type="number" value="30" min="1" max="180" style="width:80px;margin-left:8px">
+        </label>
+
+        <button onclick="startTest()" id="startBtn">🚀 Mulai Tes</button>
+        <button onclick="finishTest()" id="finishBtn">✅ Selesai</button>
+        <button onclick="exportJawaban()">📤 Ekspor Jawaban</button>
+        <button onclick="downloadSoal()">💾 Unduh Soal</button>
+        <button onclick="togglePwaInstall()" id="installBtn" style="display:none">➕ Pasang Aplikasi</button>
+      </div>
+
+      <div id="quiz" class="card"></div>
+      <div id="panel" class="card"></div>
+
+      <div id="result" class="card" style="display:none"></div>
+
+    </div>
+  </div>
+
+  <!-- Overlay to show critical warnings (ex: left screen) -->
+  <div id="overlay" style="display:none" class="overlay-warning">
+    <div class="overlay-box">
+      <h2 id="overlayTitle">Peringatan!</h2>
+      <p id="overlayMsg">Anda meninggalkan layar ujian. Guru akan diberitahu.</p>
+      <button onclick="hideOverlay()">OK</button>
+    </div>
+  </div>
+
+<script>
+/* ======================================================
+   Exam Browser Web — FIXED VERSION untuk GitHub Pages
+   ====================================================== */
+
+/* --------------------------
+   Data & state
+   -------------------------- */
+let questions = [];
+let current = 0, answers = {}, marked = {}, started = false, finished = false;
+let timer, timeLeft = 0;
+let deferredPrompt = null;
+
+/* --------------------------
+   LOAD SOAL.JSON - FIXED untuk GitHub Pages
+   -------------------------- */
+async function loadSoalJSON() {
+  try {
+    // Path untuk GitHub Pages: /Try-Out-TKA/soal.json
+    // Atau path relatif jika di root: soal.json
+    const basePath = window.location.pathname.includes('Try-Out-TKA') ? '/Try-Out-TKA/' : './';
+    const res = await fetch(`${basePath}soal.json`);
+    
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+    
+    const data = await res.json();
+    // soal.json Anda punya struktur { "soal": [...] }
+    questions = data.soal || data; // Support kedua struktur
+    console.log(`✅ Soal berhasil dimuat: ${questions.length} soal`);
+    
+    // Init render setelah soal dimuat
+    render();
+  } catch (err) {
+    console.error('❌ Gagal load soal.json:', err);
+    // Fallback ke soal default
+    questions = [
+      { id: 1, type: "multiple_choice", q: "Bagian tubuh manusia yang berfungsi sebagai penyangga tubuh dan tempat melekatnya otot adalah ...", choices: ["Otot", "Sendi", "Rangka", "Tulang rawan"], answer: 2, score: 1 },
+      { id: 2, type: "fill_blank", q: "Jepang menjajah Indonesia selama ... tahun sebelum Indonesia merdeka.", answer: "tiga setengah", acceptable_answers: ["3,5", "3½"], score: 1 }
+    ];
+    alert('Menggunakan soal default karena soal.json tidak dapat dimuat.');
+    render();
+  }
+}
+
+/* --------------------------
+   Utility: normalisasi jawaban
+   -------------------------- */
+function normalizeAnswer(text) {
+  return text.toString().toLowerCase().trim()
+    .replace(/\s+/g,' ')
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,'')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+}
+
+function checkFillBlankAnswer(userAnswer, question) {
+  if (!userAnswer || typeof userAnswer !== 'string') return false;
+  const normalizedUser = normalizeAnswer(userAnswer);
+  const normalizedMain = normalizeAnswer(question.answer || '');
+  if (normalizedUser === normalizedMain) return true;
+  if (question.acceptable_answers && Array.isArray(question.acceptable_answers)) {
+    const normalizedAcceptable = question.acceptable_answers.map(a => normalizeAnswer(a));
+    if (normalizedAcceptable.includes(normalizedUser)) return true;
+  }
+  return false;
+}
+
+/* --------------------------
+   Score calculation
+   -------------------------- */
+function calculateScore(question, studentAnswer) {
+  if (studentAnswer === undefined || studentAnswer === null || studentAnswer === '') return 0;
+  
+  switch(question.type) {
+    case 'multiple_choice': 
+      return studentAnswer === question.answer ? (question.score || 1) : 0;
+    
+    case 'fill_blank': 
+      return checkFillBlankAnswer(studentAnswer, question) ? (question.score || 1) : 0;
+    
+    case 'essay': 
+      // Skor esai sederhana berdasarkan panjang jawaban
+      if (!studentAnswer || studentAnswer.trim() === '') return 0;
+      const len = studentAnswer.trim().split(/\s+/).length;
+      const max = question.maxScore || 5;
+      if (len > 100) return max;
+      if (len > 50) return Math.ceil(max * 0.7);
+      if (len > 20) return Math.ceil(max * 0.5);
+      return Math.ceil(max * 0.3);
+    
+    case 'multiple_answer':
+      if (!Array.isArray(studentAnswer)) return 0;
+      const correctCount = studentAnswer.filter(ans => question.answers.includes(ans)).length;
+      const wrongCount = studentAnswer.filter(ans => !question.answers.includes(ans)).length;
+      const scorePerCorrect = (question.score || 1) / (question.answers?.length || 1);
+      return Math.max(0, (correctCount * scorePerCorrect) - (wrongCount * scorePerCorrect * 0.5));
+    
+    default: return 0;
+  }
+}
+
+/* --------------------------
+   UI rendering
+   -------------------------- */
+function getTypeLabel(type) {
+  const labels = { 
+    'multiple_choice':'Pilihan Ganda',
+    'true_false':'Benar/Salah',
+    'fill_blank':'Isian Singkat',
+    'essay':'Uraian',
+    'multiple_answer':'Pilihan Ganda Kompleks' 
+  };
+  return labels[type] || type;
+}
+
+function render() {
+  const quizEl = document.getElementById('quiz');
+  const panelEl = document.getElementById('panel');
+
+  if (!started) {
+    quizEl.innerHTML = `
+      <div style="padding: 20px; text-align: center;">
+        <h2>🎓 SELAMAT DATANG DI ASAS ONLINE</h2>
+        <p><strong>Mode Ujian Terkunci (Web Exam Browser)</strong></p>
+        <p>Silakan isi nama dan atur waktu ujian, lalu klik <strong>"Mulai Tes"</strong>.</p>
+        <p>Saat ujian berjalan, layar akan terkunci dalam mode layar penuh.</p>
+        <p style="color: #e11d48; margin-top: 15px;">
+          ⚠️ <strong>Peringatan:</strong> Keluar dari layar ujian akan terdeteksi dan dicatat.
+        </p>
+      </div>
+    `;
+    panelEl.innerHTML = '';
+    return;
+  }
+
+  if (finished) {
+    // Hasil akan ditampilkan di finishTest()
+    return;
+  }
+
+  // TAMPILKAN SOAL SAAT UJIAN BERJALAN
+  if (questions.length === 0) {
+    quizEl.innerHTML = '<p>Memuat soal...</p>';
+    return;
+  }
+
+  const q = questions[current];
+  let html = `<div class="time">⏳ Sisa Waktu: ${Math.floor(timeLeft/60)}:${String(timeLeft%60).padStart(2,'0')}</div>`;
+  html += `<div style="color: #666; font-size: 14px; margin-bottom: 10px;">${getTypeLabel(q.type)}</div>`;
+  html += `<div class="question" style="font-size: 18px; margin-bottom: 20px;">📝 <strong>Soal ${current+1}/${questions.length}:</strong> ${q.q}</div>`;
+
+  switch(q.type) {
+    case 'multiple_choice':
+      html += `<div style="margin-top:12px">`;
+      q.choices.forEach((choice, i) => {
+        const isSelected = answers[q.id] === i;
+        html += `<button onclick="selectChoice(${i})" 
+                style="display:block; margin:8px 0; padding:12px; text-align:left; width:100%; 
+                       background: ${isSelected ? '#e3f2fd' : 'white'}; 
+                       border: 2px solid ${isSelected ? '#0e639c' : '#ddd'}; 
+                       border-radius: 8px; cursor: pointer;">
+                ${String.fromCharCode(65+i)}. ${choice}
+                </button>`;
+      });
+      html += `</div>`;
+      break;
+    
+    case 'fill_blank':
+      html += `<input type="text" 
+              placeholder="Ketik jawaban Anda di sini..." 
+              value="${answers[q.id] || ''}" 
+              oninput="updateFillBlank(this.value)"
+              style="margin-top:12px; padding:12px; width:100%; font-size:16px; border: 2px solid #0e639c; border-radius: 6px;">`;
+      break;
+    
+    case 'essay':
+      html += `<textarea 
+              placeholder="Tulis jawaban uraian Anda di sini..." 
+              oninput="updateEssay(this.value)"
+              style="margin-top:12px; padding:12px; width:100%; min-height:150px; font-size:16px; border: 2px solid #0e639c; border-radius: 6px;">${answers[q.id] || ''}</textarea>`;
+      html += `<p style="color: #666; font-size: 14px; margin-top: 5px;">Skor maksimal: ${q.maxScore || 5}</p>`;
+      break;
+    
+    case 'multiple_answer':
+      html += `<div style="margin-top:12px">`;
+      q.choices.forEach((choice, i) => {
+        const isChecked = answers[q.id] && answers[q.id].includes(i);
+        html += `<label style="display:block; margin:10px 0; padding:8px; border-radius:6px; background: ${isChecked ? '#f0f9ff' : 'transparent'}">
+                <input type="checkbox" ${isChecked ? 'checked' : ''} 
+                       onchange="selectMultiple(${i})" style="margin-right:10px;">
+                ${String.fromCharCode(65+i)}. ${choice}
+                </label>`;
+      });
+      html += `</div>`;
+      break;
+  }
+
+  // NAVIGASI
+  html += `<div style="margin-top:25px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center">
+            <button onclick="goto(${Math.max(0, current-1)})" style="padding:10px 20px;">⬅️ Sebelumnya</button>
+            <button onclick="toggleMark()" style="padding:10px 20px; background: ${marked[q.id] ? '#fef3c7' : '#0e639c'}; color: ${marked[q.id] ? '#92400e' : 'white'}">
+              ${marked[q.id] ? '✓ Ditandai' : '🚩 Tandai'}
+            </button>
+            <button onclick="goto(${Math.min(questions.length-1, current+1)})" style="padding:10px 20px;">Selanjutnya ➡️</button>
+            <button onclick="finishTest()" style="padding:10px 20px; background: #dc2626;">✅ Kumpulkan Sekarang</button>
+           </div>`;
+
+  quizEl.innerHTML = html;
+
+  // PANEL SOAL
+  let panelHtml = `<h3>📋 Panel Navigasi Soal</h3><div class="panel-buttons">`;
+  questions.forEach((qq, i) => {
+    const classes = [];
+    if (answers[qq.id] !== undefined && answers[qq.id] !== null && answers[qq.id] !== '') classes.push('answered');
+    if (marked[qq.id]) classes.push('marked');
+    if (i === current) classes.push('current');
+    panelHtml += `<button onclick="goto(${i})" class="${classes.join(' ')}" title="Soal ${i+1}">${i+1}</button>`;
+  });
+  panelHtml += `</div><div style="margin-top:10px; font-size:14px;">
+                <span style="color:#166534">■ Terjawab</span> | 
+                <span style="color:#92400e">■ Ditandai</span> | 
+                <span style="color:#0f4aa1">■ Sedang dikerjakan</span>
+                </div>`;
+  panelEl.innerHTML = panelHtml;
+}
+
+/* --------------------------
+   Navigation handlers
+   -------------------------- */
+function selectChoice(i) { 
+  answers[questions[current].id] = i; 
+  render(); 
+}
+
+function updateFillBlank(v) { 
+  answers[questions[current].id] = v; 
+  // Auto-save, tidak perlu render ulang
+}
+
+function updateEssay(v) { 
+  answers[questions[current].id] = v; 
+}
+
+function selectMultiple(i) {
+  const qid = questions[current].id;
+  if (!answers[qid]) answers[qid] = [];
+  const idx = answers[qid].indexOf(i);
+  if (idx === -1) {
+    answers[qid].push(i);
+  } else {
+    answers[qid].splice(idx, 1);
+  }
+  render();
+}
+
+function toggleMark() { 
+  marked[questions[current].id] = !marked[questions[current].id]; 
+  render(); 
+}
+
+function goto(i){ 
+  if (i >= 0 && i < questions.length) {
+    current = i; 
+    render();
+  }
+}
+
+/* --------------------------
+   Timer / start / finish - FIXED
+   -------------------------- */
+function startTest(){
+  const nama = document.getElementById('namaSiswa').value.trim();
+  if (!nama) { 
+    alert('❌ Silakan isi nama siswa terlebih dahulu!'); 
+    document.getElementById('namaSiswa').focus();
+    return; 
+  }
+  
+  let menit = parseInt(document.getElementById('setTime').value) || 30;
+  if (menit < 1) menit = 1;
+  if (menit > 180) menit = 180;
+  
+  timeLeft = menit * 60;
+  started = true; 
+  finished = false; 
+  current = 0;
+  
+  // Aktifkan fullscreen
+  requestLockMode();
+  
+  // Start timer
+  clearInterval(timer);
+  timer = setInterval(() => { 
+    if (timeLeft > 0) {
+      timeLeft--;
+      // Update timer display setiap detik
+      const timerDisplay = document.querySelector('.time');
+      if (timerDisplay) {
+        timerDisplay.textContent = `⏳ Sisa Waktu: ${Math.floor(timeLeft/60)}:${String(timeLeft%60).padStart(2,'0')}`;
+      }
+    } else {
+      finishTest();
+    }
+  }, 1000);
+  
+  render();
+  alert(`✅ Ujian dimulai!\nNama: ${nama}\nWaktu: ${menit} menit\n\nLayar akan terkunci dalam mode fullscreen.`);
+}
+
+function finishTest(){
+  if (!started) return;
+  
+  if (!confirm("Apakah Anda yakin ingin mengumpulkan tes sekarang?\nSetelah dikumpulkan, Anda tidak dapat melanjutkan.")) {
+    return;
+  }
+  
+  clearInterval(timer);
+  finished = true;
+  
+  // Hitung skor
+  let total = 0, max = 0, correctCount = 0;
+  questions.forEach(q => {
+    const questionMax = q.score || q.maxScore || 1;
+    max += questionMax;
+    const sc = calculateScore(q, answers[q.id]);
+    total += sc;
+    if (sc > 0) correctCount++;
+  });
+  
+  const percent = max > 0 ? Math.round((total/max)*100) : 0;
+  const status = percent >= 70 ? "LULUS 🎉" : "TIDAK LULUS 💪";
+  
+  // Tampilkan hasil
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('panel').style.display = 'none';
+  
+  const resultEl = document.getElementById('result');
+  resultEl.style.display = 'block';
+  
+  let detailHtml = '';
+  questions.forEach((q, index) => {
+    const a = answers[q.id];
+    const sc = calculateScore(q, a);
+    const maxScore = q.score || q.maxScore || 1;
+    
+    let ansText = '';
+    if (q.type === 'multiple_choice') {
+      ansText = a !== undefined ? `${String.fromCharCode(65+a)}. ${q.choices[a]}` : 'Belum dijawab';
+    } else if (q.type === 'fill_blank') {
+      ansText = a || 'Belum dijawab';
+    } else if (q.type === 'essay') {
+      ansText = a ? (a.length > 100 ? a.substring(0, 100) + '...' : a) : 'Belum dijawab';
+    } else if (q.type === 'multiple_answer') {
+      ansText = a && a.length > 0 ? a.map(x => String.fromCharCode(65+x)).join(', ') : 'Belum dijawab';
+    }
+    
+    detailHtml += `
+      <div style="margin-bottom: 15px; padding: 15px; border: 1px solid #e5e7eb; border-radius: 8px; background: ${sc > 0 ? '#f0fdf4' : '#fef2f2'}">
+        <strong>Soal ${index+1}:</strong> ${q.q.substring(0, 80)}${q.q.length > 80 ? '...' : ''}<br>
+        <strong>Jawaban Anda:</strong> ${ansText}<br>
+        <strong>Skor:</strong> ${sc}/${maxScore}
+      </div>
+    `;
+  });
+  
+  resultEl.innerHTML = `
+    <h2 style="text-align: center; color: #0e639c;">📊 HASIL TES</h2>
+    <div class="score-display">${total} / ${max} (${percent}%) — ${status}</div>
+    
+    <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+      <p><strong>👤 Nama Siswa:</strong> ${document.getElementById('namaSiswa').value}</p>
+      <p><strong>📅 Tanggal Ujian:</strong> ${new Date().toLocaleString('id-ID')}</p>
+      <p><strong>✅ Soal Terjawab:</strong> ${correctCount} dari ${questions.length}</p>
+    </div>
+    
+    <h3>📝 Detail Jawaban</h3>
+    <div style="max-height: 400px; overflow-y: auto; margin: 15px 0;">
+      ${detailHtml}
+    </div>
+    
+    <div style="text-align: center; margin-top: 20px;">
+      <button onclick="exportJawaban()" style="padding: 12px 24px; font-size: 16px; background: #059669; margin: 5px;">📥 Ekspor Jawaban (JSON)</button>
+      <button onclick="location.reload()" style="padding: 12px 24px; font-size: 16px; background: #0e639c; margin: 5px;">🔄 Mulai Tes Baru</button>
+    </div>
+  `;
+  
+  // Keluar dari fullscreen
+  tryExitFullscreen();
+}
+
+/* --------------------------
+   Export / download - FIXED
+   -------------------------- */
+function exportJawaban(){
+  const nama = document.getElementById('namaSiswa').value.trim() || 'Anonim';
+  const data = { 
+    nama, 
+    tanggal: new Date().toISOString(),
+    waktuUjian: document.getElementById('setTime').value,
+    totalSkor: questions.reduce((sum, q) => sum + calculateScore(q, answers[q.id]), 0),
+    totalMaksimal: questions.reduce((sum, q) => sum + (q.score || q.maxScore || 1), 0),
+    jawaban: answers,
+    soal: questions 
+  };
+  
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `jawaban_${nama.replace(/\s+/g,'_')}_${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  
+  alert(`✅ Jawaban berhasil diekspor!\nFile: ${a.download}`);
+}
+
+function downloadSoal(){ 
+  const blob = new Blob([JSON.stringify({soal: questions}, null, 2)], {type: 'application/json'}); 
+  const url = URL.createObjectURL(blob); 
+  const a = document.createElement('a'); 
+  a.href = url; 
+  a.download = 'soal_ujian.json'; 
+  a.click(); 
+  URL.revokeObjectURL(url); 
+}
+
+/* --------------------------
+   Fullscreen / lock mode - FIXED
+   -------------------------- */
+let isLocked = false;
+
+async function requestLockMode(){
+  try {
+    // Request fullscreen
+    if (document.documentElement.requestFullscreen) {
+      await document.documentElement.requestFullscreen();
+    }
+    
+    // Lock orientation jika di mobile
+    if (screen.orientation && screen.orientation.lock) {
+      try { 
+        await screen.orientation.lock('portrait'); 
+      } catch(e){ 
+        console.log('Orientation lock tidak didukung:', e);
+      }
+    }
+    
+    window.focus();
+    isLocked = true;
+    
+    // Tampilkan tombol install PWA jika ada
+    if (deferredPrompt) {
+      document.getElementById('installBtn').style.display = 'inline-block';
+    }
+    
+  } catch(err) { 
+    console.warn('Gagal masuk mode fullscreen:', err);
+    alert('Mode fullscreen tidak dapat diaktifkan. Ujian tetap dapat dilanjutkan.');
+  }
+}
+
+async function tryExitFullscreen(){
+  try {
+    if (document.fullscreenElement && document.exitFullscreen) {
+      await document.exitFullscreen();
+    }
+    isLocked = false;
+  } catch(e){
+    console.log('Gagal keluar fullscreen:', e);
+  }
+}
+
+/* --------------------------
+   Anti-cheat & security
+   -------------------------- */
+function blockShortcuts(e){
+  const blockedKeys = ['F11', 'F12', 'Escape'];
+  if (blockedKeys.includes(e.key) && started && !finished) { 
+    e.preventDefault(); 
+    e.stopPropagation(); 
+    return false; 
+  }
+  
+  if ((e.ctrlKey || e.metaKey) && ['r','R','w','W','t','T','n','N','u','U','s','S','i','I','j','J'].includes(e.key)) { 
+    if (started && !finished) {
+      e.preventDefault(); 
+      e.stopPropagation(); 
+      alert('Shortcut ini dinonaktifkan selama ujian!');
+      return false; 
+    }
+  }
+}
+document.addEventListener('keydown', blockShortcuts, true);
+
+// Blokir right-click, copy, paste
+document.addEventListener('contextmenu', e => {
+  if (started && !finished) e.preventDefault();
+});
+
+['copy', 'cut', 'paste'].forEach(evt => {
+  document.addEventListener(evt, e => {
+    if (started && !finished) e.preventDefault();
+  });
+});
+
+let leaveCount = 0;
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && started && !finished) {
+    leaveCount++;
+    showOverlay('PERINGATAN!', `Anda meninggalkan layar ujian. Kejadian ke-${leaveCount}. Jika melebihi 3 kali, ujian akan dikumpulkan otomatis.`);
+    
+    if (leaveCount >= 3) {
+      alert('Anda terlalu sering keluar dari layar ujian. Tes dikumpulkan otomatis.');
+      finishTest();
+    }
+  } else {
+    hideOverlay();
+  }
+});
+
+function showOverlay(title, msg) {
+  document.getElementById('overlayTitle').textContent = title;
+  document.getElementById('overlayMsg').textContent = msg;
+  document.getElementById('overlay').style.display = 'flex';
+}
+
+function hideOverlay(){ 
+  document.getElementById('overlay').style.display = 'none'; 
+}
+
+// Peringatan saat tutup tab
+window.onbeforeunload = function(e) {
+  if (started && !finished) {
+    const message = "Ujian masih berjalan! Jika Anda keluar sekarang, jawaban mungkin tidak tersimpan.";
+    e.returnValue = message;
+    return message;
+  }
+};
+
+/* --------------------------
+   PWA Installation
+   -------------------------- */
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBtn').style.display = 'inline-block';
+});
+
+function togglePwaInstall(){
+  if (!deferredPrompt) {
+    alert('Aplikasi sudah terpasang atau tidak dapat dipasang di browser ini.');
+    return;
+  }
+  
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(choice => {
+    if (choice.outcome === 'accepted') {
+      alert('✅ Aplikasi berhasil dipasang! Buka dari launcher untuk pengalaman terbaik.');
+    }
+    deferredPrompt = null;
+    document.getElementById('installBtn').style.display = 'none';
+  });
+}
+
+/* --------------------------
+   Service Worker Registration
+   -------------------------- */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    // Path relatif untuk GitHub Pages
+    const swPath = window.location.pathname.includes('Try-Out-TKA') 
+      ? '/Try-Out-TKA/sw.js' 
+      : './sw.js';
+    
+    navigator.serviceWorker.register(swPath)
+      .then(reg => {
+        console.log('✅ Service Worker terdaftar:', reg);
+      })
+      .catch(err => {
+        console.log('❌ Service Worker gagal:', err);
+      });
+  });
+}
+
+/* --------------------------
+   Initialize
+   -------------------------- */
+// Load soal saat halaman dimuat
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('🚀 Aplikasi ASAS Exam siap!');
+  loadSoalJSON();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "ASAS SDN YANTI — ExamBrowser",
+  "short_name": "ASAS Exam",
+  "description": "Aplikasi Ujian Terkunci untuk SD Negeri Yanti",
+  "start_url": "/Try-Out-TKA/",
+  "scope": "/Try-Out-TKA/",
+  "display": "standalone",
+  "background_color": "#0e639c",
+  "theme_color": "#0e639c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Mulai Ujian",
+      "short_name": "Ujian",
+      "description": "Mulai ujian baru",
+      "url": "/Try-Out-TKA/?action=start",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
