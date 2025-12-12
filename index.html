@@ -645,19 +645,17 @@ function togglePwaInstall(){
   });
 }
 
-/* --------------------------
-   Service Worker Registration
+------------------------
+   Service Worker Registration - FIXED untuk Android
    -------------------------- */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    // Path relatif untuk GitHub Pages
-    const swPath = window.location.pathname.includes('Try-Out-TKA') 
-      ? '/Try-Out-TKA/sw.js' 
-      : './sw.js';
+    // Gunakan path relatif '.'
+    const swPath = './sw.js';
     
     navigator.serviceWorker.register(swPath)
       .then(reg => {
-        console.log('✅ Service Worker terdaftar:', reg);
+        console.log('✅ Service Worker terdaftar di scope:', reg.scope);
       })
       .catch(err => {
         console.log('❌ Service Worker gagal:', err);
