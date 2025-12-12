@@ -509,6 +509,15 @@ function attachAntiCheatListeners(){
 /* --------------------------
    Init
    -------------------------- */
+  const defaultQuestions = [
+  { id: 1, type: "multiple_choice", q: "Apa lambang sila pertama Pancasila?", choices: ["Bintang","Rantai","Pohon Beringin","Banteng"], answer: 0, score: 1 },
+  { id: 2, type: "true_false", q: "Matahari terbit dari arah barat.", answer: false, score: 1 },
+  { id: 3, type: "fill_blank", q: "Sebutkan bunyi sila kedua Pancasila!", answer: "kemanusiaan yang adil dan beradab", acceptable_answers: ["kemanusiaan yang adil dan beradap","kemanusiaan yg adil dan beradab"], score: 1 },
+  { id: 4, type: "fill_blank", q: "Apa lambang sila ketiga Pancasila?", answer: "pohon beringin", acceptable_answers: ["beringin","pohonberingin"], score: 1 },
+  { id: 5, type: "essay", q: "Jelaskan mengapa kita harus menjaga kebersihan lingkungan!", maxScore: 10 },
+  { id: 6, type: "multiple_answer", q: "Pilih hewan yang termasuk mamalia:", choices: ["Sapi","Ayam","Ikan","Kucing"], answers: [0,3], score: 2 }
+];
+
 loadSoalJSON();
 
 /* End script */
