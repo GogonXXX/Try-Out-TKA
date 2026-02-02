@@ -650,8 +650,9 @@ function togglePwaInstall(){
     document.getElementById('installBtn').style.display = 'none';
   });
 }
-
-------------------------
+/* ------------------------
+   Service Worker Registration
+   ------------------------ */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     const swPath = './sw.js';
@@ -665,6 +666,7 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
+
 
 /* --------------------------
    Initialize
