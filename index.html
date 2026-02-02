@@ -95,12 +95,8 @@ let deferredPrompt = null;
   
 function getSoalFile() {
   const params = new URLSearchParams(window.location.search);
-  const mapel = params.get('mapel') || 'mtk';
-
-  const isGithubPages = window.location.pathname.includes('Try-Out-TKA-1');
-  const basePath = isGithubPages ? '/Try-Out-TKA/soal/' : './soal/';
-
-  return `${basePath}${mapel}.json`;
+  const mapel = params.get('mapel') || 'soal';
+  return `${mapel}.json`;
 }
 
 /* --------------------------
@@ -108,7 +104,7 @@ function getSoalFile() {
    -------------------------- */
 async function loadSoalJSON() {
   try {
-    // Path untuk GitHub Pages: /Try-Out-TKA/soal.json
+    // Path untuk GitHub Pages: /Try-Out-TKA-1/soal.json
     // Atau path relatif jika di root: soal.json
     const fileSoal = getSoalFile();
     const res = await fetch(fileSoal);
@@ -131,9 +127,6 @@ async function loadSoalJSON() {
     ];
     alert('Menggunakan soal default karena soal.json tidak dapat dimuat.');
     render();
-    document.addEventListener("DOMContentLoaded", () => {
-  loadSoalJSON();
-});
   }
 }
 
@@ -681,7 +674,7 @@ if ('serviceWorker' in navigator) {
    -------------------------- */
 // Load soal saat halaman dimuat
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🚀 Aplikasi ASAS Exam siap!');
+  console.log('🚀 Aplikasi siap');
   loadSoalJSON();
 });
 </script>
