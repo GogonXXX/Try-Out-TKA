@@ -470,16 +470,17 @@ function finishTest(){
       ansText = a && a.length > 0 ? a.map(x => String.fromCharCode(65+x)).join(', ') : 'Belum dijawab';
     }
     
-    detailHtml += `
-      <div style="margin-bottom: 15px; padding: 15px; border: 1px solid #e5e7eb; border-radius: 8px; background: ${sc > 0 ? '#f0fdf4' : '#fef2f2'}">
-  <strong>Soal ${index+1}:</strong><br>
-<div style="margin:6px 0;">
-  ${q.q}
-</div>
-        <strong>Jawaban Anda:</strong> ${ansText}<br>
-        <strong>Skor:</strong> ${sc}/${maxScore}
-      </div>
-    `;
+    const cleanQuestion = q.q.replace(/^\s+/gm, '').trim();
+detailHtml += `
+  <div style="margin-bottom: 15px; padding: 15px; border: 1px solid #e5e7eb; border-radius: 8px; background: ${sc > 0 ? '#f0fdf4' : '#fef2f2'}">
+    <strong>Soal ${index+1}:</strong><br>
+    <div style="margin:6px 0;">
+      ${cleanQuestion}
+    </div>
+    <strong>Jawaban Anda:</strong> ${ansText}<br>
+    <strong>Skor:</strong> ${sc}/${maxScore}
+  </div>
+`;
   });
   
   resultEl.innerHTML = `
