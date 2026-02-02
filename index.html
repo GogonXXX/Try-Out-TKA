@@ -472,10 +472,8 @@ function finishTest(){
     
     detailHtml += `
       <div style="margin-bottom: 15px; padding: 15px; border: 1px solid #e5e7eb; border-radius: 8px; background: ${sc > 0 ? '#f0fdf4' : '#fef2f2'}">
-        <div style="font-weight:600;">
-  Soal ${index + 1}:
-</div>
-<div style="white-space:pre-wrap;">
+  <strong>Soal ${index+1}:</strong><br>
+<div style="margin:6px 0; white-space:pre-wrap;">
   ${q.q}
 </div>
         <strong>Jawaban Anda:</strong> ${ansText}<br>
