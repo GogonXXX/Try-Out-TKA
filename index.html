@@ -97,7 +97,7 @@ function getSoalFile() {
   const params = new URLSearchParams(window.location.search);
   const mapel = params.get('mapel') || 'mtk';
 
-  const isGithubPages = window.location.pathname.includes('Try-Out-TKA');
+  const isGithubPages = window.location.pathname.includes('Try-Out-TKA-1');
   const basePath = isGithubPages ? '/Try-Out-TKA/soal/' : './soal/';
 
   return `${basePath}${mapel}.json`;
@@ -131,6 +131,9 @@ async function loadSoalJSON() {
     ];
     alert('Menggunakan soal default karena soal.json tidak dapat dimuat.');
     render();
+    document.addEventListener("DOMContentLoaded", () => {
+  loadSoalJSON();
+});
   }
 }
 
