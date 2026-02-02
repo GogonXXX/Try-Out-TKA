@@ -652,11 +652,8 @@ function togglePwaInstall(){
 }
 
 ------------------------
-   Service Worker Registration - FIXED untuk Android
-   -------------------------- */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    // Gunakan path relatif '.'
     const swPath = './sw.js';
     
     navigator.serviceWorker.register(swPath)
