@@ -92,6 +92,16 @@ let questions = [];
 let current = 0, answers = {}, marked = {}, started = false, finished = false;
 let timer, timeLeft = 0;
 let deferredPrompt = null;
+  
+function getSoalFile() {
+  const params = new URLSearchParams(window.location.search);
+  const mapel = params.get('mapel') || 'mtk';
+
+  const isGithubPages = window.location.pathname.includes('Try-Out-TKA');
+  const basePath = isGithubPages ? '/Try-Out-TKA/soal/' : './soal/';
+
+  return `${basePath}${mapel}.json`;
+}
 
 /* --------------------------
    LOAD SOAL.JSON - FIXED untuk GitHub Pages
@@ -100,8 +110,8 @@ async function loadSoalJSON() {
   try {
     // Path untuk GitHub Pages: /Try-Out-TKA/soal.json
     // Atau path relatif jika di root: soal.json
-    const basePath = window.location.pathname.includes('Try-Out-TKA') ? '/Try-Out-TKA/' : './';
-    const res = await fetch(`${basePath}soal.json`);
+    const fileSoal = getSoalFile();
+    const res = await fetch(fileSoal);
     
     if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
     
