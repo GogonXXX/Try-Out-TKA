@@ -104,29 +104,29 @@ function getSoalFile() {
    -------------------------- */
 async function loadSoalJSON() {
   try {
-    // Path untuk GitHub Pages: /Try-Out-TKA-1/soal.json
-    // Atau path relatif jika di root: soal.json
-    const fileSoal = getSoalFile();
-    const res = await fetch(fileSoal);
-    
-    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-    
+    const res = await fetch('./soal.json');
+    if (!res.ok) throw new Error('Gagal load soal.json');
+
     const data = await res.json();
-    // soal.json Anda punya struktur { "soal": [...] }
-    questions = data.soal || data; // Support kedua struktur
-    console.log(`✅ Soal berhasil dimuat: ${questions.length} soal`);
-    
-    // Init render setelah soal dimuat
+
+    // 🔥 PAKSA STRUKTUR ARRAY
+    questions = Array.isArray(data)
+      ? data
+      : Array.isArray(data.soal)
+        ? data.soal
+        : [];
+
+    console.log('Soal dimuat:', questions);
+
+    if (questions.length === 0) {
+      alert('❌ Soal kosong atau format salah');
+      return;
+    }
+
     render();
-  } catch (err) {
-    console.error('❌ Gagal load soal.json:', err);
-    // Fallback ke soal default
-    questions = [
-      { id: 1, type: "multiple_choice", q: "Bagian tubuh manusia yang berfungsi sebagai penyangga tubuh dan tempat melekatnya otot adalah ...", choices: ["Otot", "Sendi", "Rangka", "Tulang rawan"], answer: 2, score: 1 },
-      { id: 2, type: "fill_blank", q: "Jepang menjajah Indonesia selama ... tahun sebelum Indonesia merdeka.", answer: "tiga setengah", acceptable_answers: ["3,5", "3½"], score: 1 }
-    ];
-    alert('Menggunakan soal default karena soal.json tidak dapat dimuat.');
-    render();
+  } catch (e) {
+    console.error(e);
+    alert('❌ soal.json tidak bisa dibaca');
   }
 }
 
