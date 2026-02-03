@@ -312,11 +312,27 @@ function finishTest() {
 
 function exportJawaban() {
   const nama = document.getElementById('namaSiswa').value.trim() || 'Anonim';
+  
+  // Ambil nama paket dari currentFileName (tanpa .json)
+  let namaPaket = currentFileName.replace('.json', '');
+  
+  // Jika currentFileName kosong atau default, ambil dari URL parameter
+  if (!namaPaket || namaPaket === 'soal') {
+    const urlParams = new URLSearchParams(window.location.search);
+    const mapelParam = urlParams.get('mapel');
+    if (mapelParam) {
+      namaPaket = mapelParam;
+    } else {
+      namaPaket = 'soal';
+    }
+  }
+  
+  // Data yang akan diekspor
   const data = { 
     nama, 
     tanggal: new Date().toISOString(),
     waktuUjian: document.getElementById('setTime').value,
-    paketSoal: currentFileName,
+    paketSoal: namaPaket,
     totalSkor: questions.reduce((sum, q) => sum + (answers[q.id] === q.answer ? (q.score || 1) : 0), 0),
     totalMaksimal: questions.reduce((sum, q) => sum + (q.score || 1), 0),
     jawaban: answers,
@@ -329,7 +345,7 @@ function exportJawaban() {
   a.href = url;
   
   // NAMA FILE: Jawaban_namasiswa_namapaket.json
-  const namaFile = `Jawaban_${nama.replace(/\s+/g,'_')}_${currentFileName.replace('.json','')}.json`;
+  const namaFile = `Jawaban_${nama.replace(/\s+/g,'_')}_${namaPaket.replace(/\s+/g,'_')}.json`;
   a.download = namaFile;
   
   document.body.appendChild(a);
