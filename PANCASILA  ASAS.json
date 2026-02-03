@@ -1,0 +1,458 @@
+{
+  "soal": [
+    {
+      "id": 1,
+      "type": "multiple_choice",
+      "q": "Contoh pengamalan Sila 1 di sekolah adalah ...",
+      "choices": [
+        "Menghormati teman yang berbeda agama",
+        "Bermain tanpa aturan",
+        "Membeda-bedakan teman",
+        "Mencontek saat ulangan"
+      ],
+      "answer": 0,
+      "cognitive_level": "C3",
+      "materi": "Sila 1: Ketuhanan Yang Maha Esa"
+    },
+    {
+      "id": 2,
+      "type": "multiple_choice",
+      "q": "Nilai yang terkandung dalam Sila 2 Pancasila adalah ...",
+      "choices": [
+        "Kemanusiaan yang adil dan beradab",
+        "Persatuan Indonesia",
+        "Kerakyatan",
+        "Keadilan sosial"
+      ],
+      "answer": 0,
+      "cognitive_level": "C3",
+      "materi": "Sila 2: Kemanusiaan yang Adil dan Beradab"
+    },
+    {
+      "id": 3,
+      "type": "multiple_choice",
+      "q": "Pengamalan Sila 3 Pancasila di rumah bisa berupa gambar ....",
+      "choices": [
+        "<img src='https://i.pinimg.com/474x/51/e9/53/51e953fa33878661c5c86c8b8f79dd39.jpg' style='max-width:250px; max-height:200px; display:block; margin:5px 0; border-radius:5px;'>",
+        "<img src='https://img.freepik.com/vektor-premium/ilustrasi-vektor-dua-anak-laki-laki-bertengkar-satu-sama-lain_642458-199.jpg' style='max-width:250px; max-height:200px; display:block; margin:5px 0; border-radius:5px;'>",
+        "<img src='https://assets-a1.kompasiana.com/items/album/2024/03/01/premium-vector-happy-cute-kid-play-with-friend-together-65e17db0c57afb111354fc43.jpeg' style='max-width:250px; max-height:200px; display:block; margin:5px 0; border-radius:5px;'>",
+        "<img src='https://img.freepik.com/vektor-premium/anak-laki-laki-kecil-bermain-sepak-bola-seorang-anak-bahagia-bermain-sepak-bola-di-lapangan-sepak-bola-ilustrasi-vektor_1179803-46.jpg' style='max-width:250px; max-height:200px; display:block; margin:5px 0; border-radius:5px;'>"
+      ],
+      "answer": 0,
+      "cognitive_level": "C4",
+      "materi": "Sila 3: Persatuan Indonesia"
+    },
+    {
+      "id": 4,
+      "type": "multiple_choice",
+      "q": "Gambar di bawah pengamalan Pancasila Sila 4 di sekolah adalah ...",
+      "choices": [
+        "Mengikuti musyawarah kelas dengan sopan",
+        "Menolak pendapat teman",
+        "Bersikap seenaknya",
+        "Tidak menghargai guru"
+      ],
+      "answer": 0,
+      "cognitive_level": "C4",
+      "image": "https://i.pinimg.com/736x/af/31/da/af31da18935846ca4f5d5c6c11edb704.jpg",
+      "materi": "Sila 4: Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan"
+    },
+    {
+      "id": 5,
+      "type": "multiple_choice",
+      "q": "Nilai keadilan sosial dalam Sila 5 bisa diterapkan di masyarakat dengan ...",
+      "choices": [
+        "Membantu tetangga yang membutuhkan",
+        "Memprioritaskan diri sendiri",
+        "Mengambil hak orang lain",
+        "Mengabaikan peraturan"
+      ],
+      "answer": 0,
+      "cognitive_level": "C4",
+      "materi": "Sila 5: Keadilan Sosial Bagi Seluruh Rakyat Indonesia"
+    },
+    {
+      "id": 6,
+      "type": "multiple_choice",
+      "q": "Norma agama berfungsi ...",
+      "choices": [
+        "Memberi pedoman hidup berdasarkan ajaran agama",
+        "Membuat peraturan sekolah",
+        "Menentukan hak anak",
+        "Mengatur lalu lintas"
+      ],
+      "answer": 0,
+      "cognitive_level": "C3",
+      "materi": "Norma"
+    },
+    {
+      "id": 7,
+      "type": "multiple_choice",
+      "q": "Contoh norma kesusilaan di sekolah ditunjukkan pada gambar ...",
+      "choices": [
+        "<img src='https://i.pinimg.com/736x/65/9b/ef/659bef29222493e4b55b36fba28c2ecd.jpg' style='max-width:250px; max-height:200px; display:block; margin:5px 0; border-radius:5px;'>",
+        "<img src='https://i.pinimg.com/736x/be/07/9c/be079c82b6399131cd61aefdd8586a1d.jpg' style='max-width:250px; max-height:200px; display:block; margin:5px 0; border-radius:5px;'>",
+        "<img src='https://i.pinimg.com/736x/c7/12/2d/c7122dc8a5e069bbd72abd2af977c848.jpg' style='max-width:250px; max-height:200px; display:block; margin:5px 0; border-radius:5px;'>",
+        "<img src='https://i.pinimg.com/736x/b3/9a/a5/b39aa5c9079773b0c286f0c44f11daff.jpg' style='max-width:250px; max-height:200px; display:block; margin:5px 0; border-radius:5px;'>"
+      ],
+      "answer": 0,
+      "cognitive_level": "C3",
+      "materi": "Norma"
+    },
+    {
+      "id": 8,
+      "type": "multiple_choice",
+      "q": "Hak anak di rumah misalnya adalah ...",
+      "choices": [
+        "Mendapat kasih sayang orang tua",
+        "Mengabaikan perintah orang tua",
+        "Memukul saudara",
+        "Mencuri makanan"
+      ],
+      "answer": 0,
+      "cognitive_level": "C3",
+      "materi": "Hak dan Kewajiban Anak"
+    },
+    {
+      "id": 9,
+      "type": "multiple_choice",
+      "q": "Kewajiban anak sebagai pelajar di sekolah adalah ...",
+      "choices": [
+        "Belajar dengan tekun",
+        "Berperilaku seenaknya",
+        "Membolos tanpa izin",
+        "Mengganggu teman belajar"
+      ],
+      "answer": 0,
+      "cognitive_level": "C3",
+      "materi": "Kewajiban Anak"
+    },
+    {
+      "id": 10,
+      "type": "multiple_choice",
+      "q": "Musyawarah dilakukan untuk ...",
+      "choices": [
+        "Mencapai keputusan bersama",
+        "Menang sendiri",
+        "Mengabaikan pendapat teman",
+        "Memaksakan kehendak sendiri"
+      ],
+      "answer": 0,
+      "cognitive_level": "C4",
+      "materi": "Musyawarah"
+    },
+    {
+      "id": 11,
+      "type": "multiple_choice",
+      "q": "Manfaat musyawarah di sekolah antara lain ...",
+      "choices": [
+        "Menumbuhkan rasa kebersamaan",
+        "Membuat siswa malas",
+        "Memecah belah teman",
+        "Menolak aturan sekolah"
+      ],
+      "answer": 0,
+      "cognitive_level": "C4",
+      "materi": "Musyawarah di Sekolah"
+    },
+    {
+      "id": 12,
+      "type": "multiple_choice",
+      "q": "Contoh pengamalan norma hukum di masyarakat adalah ...",
+      "choices": [
+        "Tidak membuang sampah sembarangan",
+        "Mencuri buah tetangga",
+        "Merusak fasilitas umum",
+        "Menilang teman"
+      ],
+      "answer": 0,
+      "cognitive_level": "C5",
+      "materi": "Norma"
+    },
+    {
+      "id": 13,
+      "type": "multiple_choice",
+      "q": "Hak anak di sekolah antara lain ...",
+      "choices": [
+        "Mendapatkan pendidikan",
+        "Memukul teman",
+        "Mengganggu guru",
+        "Merusak buku"
+      ],
+      "answer": 0,
+      "cognitive_level": "C5",
+      "materi": "Hak dan Kewajiban Anak"
+    },
+    {
+      "id": 14,
+      "type": "multiple_choice",
+      "q": "Kewajiban anak di rumah selain belajar adalah ...",
+      "choices": [
+        "Membantu pekerjaan rumah",
+        "Menolak perintah orang tua",
+        "Bertengkar dengan saudara",
+        "Membuat keributan"
+      ],
+      "answer": 0,
+      "cognitive_level": "C5",
+      "materi": "Kewajiban Anak"
+    },
+    {
+      "id": 15,
+      "type": "multiple_choice",
+      "q": "Contoh Pada gambar menunjukan sikap...",
+      "choices": [
+        "Bekerja sama dengan teman",
+        "Membeda-bedakan teman",
+        "Mengabaikan teman dari daerah lain",
+        "Menolak kerja kelompok"
+      ],
+      "answer": 0,
+      "cognitive_level": "C5",
+      "image": "https://i.pinimg.com/736x/bd/a4/18/bda418a40c4652d37ae8877cf922419b.jpg",
+      "materi": "Sila 3"
+    },
+    {
+      "id": 16,
+      "type": "multiple_choice",
+      "q": "Pengamalan Sila 2 di masyarakat dapat berupa ...",
+      "choices": [
+        "Menolong tetangga yang kesusahan",
+        "Mengabaikan orang tua",
+        "Mengambil hak orang lain",
+        "Bersikap sombong"
+      ],
+      "answer": 0,
+      "cognitive_level": "C6",
+      "materi": "Sila 2"
+    },
+    {
+      "id": 17,
+      "type": "multiple_choice",
+      "q": "Contoh pengamalan Sila 5 di sekolah adalah ...",
+      "choices": [
+        "Membagi tugas secara adil",
+        "Mengambil hak teman",
+        "Memaksakan kehendak sendiri",
+        "Mengganggu teman belajar"
+      ],
+      "answer": 0,
+      "cognitive_level": "C6",
+      "materi": "Sila 5"
+    },
+    {
+      "id": 18,
+      "type": "multiple_choice",
+      "q": "Contoh mengamalkan norma kesopanan di rumah adalah ...",
+      "choices": [
+        "Berbicara sopan kepada orang tua",
+        "Berteriak saat makan",
+        "Mengganggu anggota keluarga",
+        "Merusak perabot rumah"
+      ],
+      "answer": 0,
+      "cognitive_level": "C6",
+      "materi": "Norma"
+    },
+    {
+      "id": 19,
+      "type": "multiple_choice",
+      "q": "Manfaat musyawarah di rumah antara lain ...",
+      "choices": [
+        "Memutuskan masalah keluarga bersama",
+        "Mengabaikan pendapat anggota keluarga",
+        "Memaksakan kehendak sendiri",
+        "Bertengkar dengan anggota keluarga"
+      ],
+      "answer": 0,
+      "cognitive_level": "C6",
+      "materi": "Musyawarah"
+    },
+    {
+      "id": 20,
+      "type": "multiple_choice",
+      "q": "Contoh pengamalan Sila 1 dalam kehidupan sehari-hari adalah ...",
+      "choices": [
+        "Berdoa sesuai agama masing-masing",
+        "Menolak teman berbeda agama",
+        "Merendahkan orang lain",
+        "Mencemooh teman"
+      ],
+      "answer": 0,
+      "cognitive_level": "C6",
+      "materi": "Sila 1"
+    },
+
+    {
+      "id": 21,
+      "type": "fill_blank",
+      "q": "Tuliskan salah satu contoh hak anak di sekolah.",
+      "answer": "Mendapatkan pendidikan",
+      "acceptable_answers": ["Mendapatkan pendidikan","mendapatkan pendidikan","MENDAPATKAN PENDIDIKAN"],
+      "score": 1,
+      "materi": "Hak Anak",
+      "cognitive_level": "C1"
+    },
+    {
+      "id": 22,
+      "type": "fill_blank",
+      "q": "Sebutkan kewajiban anak di rumah selain belajar.",
+      "answer": "Membantu pekerjaan rumah",
+      "acceptable_answers": ["Membantu pekerjaan rumah","membantu pekerjaan rumah","MEMBANTU PEKERJAAN RUMAH"],
+      "score": 1,
+      "materi": "Kewajiban Anak",
+      "cognitive_level": "C2"
+    },
+    {
+      "id": 23,
+      "type": "fill_blank",
+      "q": "Contoh pengamalan Sila 3 di sekolah.",
+      "answer": "Bekerja sama dengan teman",
+      "acceptable_answers": ["Bekerja sama dengan teman","bekerja sama dengan teman","BEKERJA SAMA DENGAN TEMAN"],
+      "score": 1,
+      "materi": "Sila 3",
+      "cognitive_level": "C3"
+    },
+    {
+      "id": 24,
+      "type": "fill_blank",
+      "q": "Sebutkan salah satu norma kesopanan di rumah.",
+      "answer": "Berbicara sopan kepada orang tua",
+      "acceptable_answers": ["Berbicara sopan kepada orang tua","berbicara sopan kepada orang tua","BERBICARA SOPAN KEPADA ORANG TUA"],
+      "score": 1,
+      "materi": "Norma",
+      "cognitive_level": "C1"
+    },
+    {
+      "id": 25,
+      "type": "fill_blank",
+      "q": "Sebutkan salah satu pengamalan Sila 5 di masyarakat.",
+      "answer": "Membantu tetangga yang membutuhkan",
+      "acceptable_answers": ["Membantu tetangga yang membutuhkan","membantu tetangga yang membutuhkan","MEMBANTU TETANGGA YANG MEMBUTUHKAN"],
+      "score": 1,
+      "materi": "Sila 5",
+      "cognitive_level": "C2"
+    },
+    {
+      "id": 26,
+      "type": "fill_blank",
+      "q": "Manfaat musyawarah di sekolah.",
+      "answer": "Menumbuhkan rasa kebersamaan",
+      "acceptable_answers": ["Menumbuhkan rasa kebersamaan","menumbuhkan rasa kebersamaan","MENUMBUHKAN RASA KEBERSAMAAN"],
+      "score": 1,
+      "materi": "Musyawarah",
+      "cognitive_level": "C3"
+    },
+    {
+      "id": 27,
+      "type": "fill_blank",
+      "q": "Contoh pengamalan Sila 1 di rumah.",
+      "answer": "Berdoa sesuai agama masing-masing",
+      "acceptable_answers": ["Berdoa sesuai agama masing-masing","berdoa sesuai agama masing-masing","BERDOA SESUAI AGAMA MASING-MASING"],
+      "score": 1,
+      "materi": "Sila 1",
+      "cognitive_level": "C4"
+    },
+    {
+      "id": 28,
+      "type": "fill_blank",
+      "q": "Contoh pengamalan Sila 2 di rumah.",
+      "answer": "Menolong tetangga yang kesusahan",
+      "acceptable_answers": ["Menolong tetangga yang kesusahan","menolong tetangga yang kesusahan","MENOLONG TETANGGA YANG KESUSAHAN"],
+      "score": 1,
+      "materi": "Sila 2",
+      "cognitive_level": "C3"
+    },
+    {
+      "id": 29,
+      "type": "fill_blank",
+      "q": "Contoh norma hukum di masyarakat.",
+      "answer": "Tidak membuang sampah sembarangan",
+      "acceptable_answers": ["Tidak membuang sampah sembarangan","tidak membuang sampah sembarangan","TIDAK MEMBUANG SAMPAH SEMBARANGAN"],
+      "score": 1,
+      "materi": "Norma",
+      "cognitive_level": "C4"
+    },
+    {
+      "id": 30,
+      "type": "fill_blank",
+      "q": "Sebutkan salah satu kewajiban anak sebagai pelajar di sekolah.",
+      "answer": "Belajar dengan tekun",
+      "acceptable_answers": ["Belajar dengan tekun","belajar dengan tekun","BELAJAR DENGAN TEKUN"],
+      "score": 1,
+      "materi": "Kewajiban Anak",
+      "cognitive_level": "C4"
+    },
+
+    {
+      "id": 31,
+      "type": "essay",
+      "q": "Jelaskan pengamalan Sila 1 dan Sila 2 di kehidupan sehari-hari, berikan contohnya!",
+      "maxScore": 4,
+      "scoring": {
+        "method": "keyword_based",
+        "keywords": [
+          {"group": "jawaban", "words": ["Sila 1","Sila 2","Berdoa","Menolong","Agama","Kemanusiaan"], "weight": 1.0}
+        ],
+        "thresholds": {"excellent": 0.8,"good":0.6,"fair":0.4}
+      },
+      "materi": "Sila 1 & 2"
+    },
+    {
+      "id": 32,
+      "type": "essay",
+      "q": "Jelaskan pengamalan Sila 3 dan Sila 4 di sekolah atau rumah, sertakan contoh.",
+      "maxScore": 4,
+      "scoring": {
+        "method": "keyword_based",
+        "keywords": [
+          {"group": "jawaban", "words": ["Sila 3","Sila 4","Persatuan","Musyawarah","Kerjasama"], "weight": 1.0}
+        ],
+        "thresholds": {"excellent": 0.8,"good":0.6,"fair":0.4}
+      },
+      "materi": "Sila 3 & 4"
+    },
+    {
+      "id": 33,
+      "type": "essay",
+      "q": "Jelaskan pengamalan Sila 5 dan manfaat musyawarah bagi kehidupan sehari-hari.",
+      "maxScore": 4,
+      "scoring": {
+        "method": "keyword_based",
+        "keywords": [
+          {"group": "jawaban", "words": ["Sila 5","Keadilan","Membantu","Musyawarah","Rasa kebersamaan"], "weight": 1.0}
+        ],
+        "thresholds": {"excellent": 0.8,"good":0.6,"fair":0.4}
+      },
+      "materi": "Sila 5 & Musyawarah"
+    },
+    {
+      "id": 34,
+      "type": "essay",
+      "q": "Tuliskan contoh norma agama, kesopanan, dan hukum yang kamu amalkan di rumah atau sekolah.",
+      "maxScore": 4,
+      "scoring": {
+        "method": "keyword_based",
+        "keywords": [
+          {"group": "jawaban", "words": ["Norma agama","Norma kesopanan","Norma hukum","Sopan","Berdoa","Tidak membuang sampah"], "weight": 1.0}
+        ],
+        "thresholds": {"excellent": 0.8,"good":0.6,"fair":0.4}
+      },
+      "materi": "Norma"
+    },
+    {
+      "id": 35,
+      "type": "essay",
+      "q": "Jelaskan hak dan kewajibanmu sebagai anak di rumah dan sekolah beserta contohnya.",
+      "maxScore": 4,
+      "scoring": {
+        "method": "keyword_based",
+        "keywords": [
+          {"group": "jawaban", "words": ["Hak anak","Kewajiban anak","Belajar","Mendapat kasih sayang","Membantu pekerjaan rumah"], "weight": 1.0}
+        ],
+        "thresholds": {"excellent": 0.8,"good":0.6,"fair":0.4}
+      },
+      "materi": "Hak & Kewajiban Anak"
+    }
+  ]
+}
