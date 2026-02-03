@@ -311,19 +311,33 @@ function finishTest() {
 }
 
 function exportJawaban() {
-  const data = {
-    nama: document.getElementById('namaSiswa').value,
-    paket: currentFileName,
+  const nama = document.getElementById('namaSiswa').value.trim() || 'Anonim';
+  const data = { 
+    nama, 
+    tanggal: new Date().toISOString(),
+    waktuUjian: document.getElementById('setTime').value,
+    paketSoal: currentFileName,
+    totalSkor: questions.reduce((sum, q) => sum + (answers[q.id] === q.answer ? (q.score || 1) : 0), 0),
+    totalMaksimal: questions.reduce((sum, q) => sum + (q.score || 1), 0),
     jawaban: answers,
-    soal: questions
+    soal: questions 
   };
+  
   const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `jawaban_${currentFileName.replace('.json','')}.json`;
+  
+  // NAMA FILE: Jawaban_namasiswa_namapaket.json
+  const namaFile = `Jawaban_${nama.replace(/\s+/g,'_')}_${currentFileName.replace('.json','')}.json`;
+  a.download = namaFile;
+  
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
+  
+  alert(`✅ Jawaban berhasil diekspor!\nFile: ${namaFile}`);
 }
 
 // ==================== INIT ====================
