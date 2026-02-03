@@ -121,6 +121,7 @@ let questions = [];
 let current = 0, answers = {}, marked = {}, started = false, finished = false;
 let timer, timeLeft = 0;
 let deferredPrompt = null;
+let currentFileName = '';
   
 function getSoalFile() {
   const params = new URLSearchParams(window.location.search);
@@ -129,33 +130,41 @@ function getSoalFile() {
 }
 
 /* --------------------------
-   LOAD SOAL.JSON - FIXED untuk GitHub Pages
+   LOAD SOAL.JSON - MULTI-FILE SUPPORT
    -------------------------- */
 async function loadSoalJSON() {
   try {
-    const res = await fetch('./soal.json');
-    if (!res.ok) throw new Error('Gagal load soal.json');
-
-    const data = await res.json();
-
-    // 🔥 PAKSA STRUKTUR ARRAY
-    questions = Array.isArray(data)
-      ? data
-      : Array.isArray(data.soal)
-        ? data.soal
-        : [];
-
-    console.log('Soal dimuat:', questions);
+    // Ambil nama file dari parameter URL
+    currentFileName = getSoalFile(); // contoh: "matematika.json"
+    
+    const res = await fetch(`./${currentFileName}`);
+    
+    if (!res.ok) {
+      // Jika file tidak ditemukan, fallback ke soal.json
+      console.warn(`${currentFileName} tidak ditemukan, fallback ke soal.json`);
+      currentFileName = 'soal.json';
+      const defaultRes = await fetch('./soal.json');
+      if (!defaultRes.ok) throw new Error('Gagal load soal.json');
+      
+      const defaultData = await defaultRes.json();
+      questions = Array.isArray(defaultData) ? defaultData : 
+                 Array.isArray(defaultData.soal) ? defaultData.soal : [];
+    } else {
+      const data = await res.json();
+      questions = Array.isArray(data) ? data : 
+                 Array.isArray(data.soal) ? data.soal : [];
+    }
 
     if (questions.length === 0) {
       alert('❌ Soal kosong atau format salah');
       return;
     }
 
+    console.log(`Soal "${currentFileName}" dimuat:`, questions.length, 'soal');
     render();
   } catch (e) {
     console.error(e);
-    alert('❌ soal.json tidak bisa dibaca');
+    alert('❌ Tidak bisa memuat soal. Pastikan file JSON tersedia.');
   }
 }
 
@@ -234,20 +243,25 @@ function render() {
   const panelEl = document.getElementById('panel');
 
   if (!started) {
-    quizEl.innerHTML = `
-      <div style="padding: 20px; text-align: center;">
-        <h2>🎓 SELAMAT DATANG DI ASAS ONLINE</h2>
-        <p><strong>Mode Ujian Terkunci (Web Exam Browser)</strong></p>
-        <p>Silakan isi nama dan atur waktu ujian, lalu klik <strong>"Mulai Tes"</strong>.</p>
-        <p>Saat ujian berjalan, layar akan terkunci dalam mode layar penuh.</p>
-        <p style="color: #e11d48; margin-top: 15px;">
-          ⚠️ <strong>Peringatan:</strong> Keluar dari layar ujian akan terdeteksi dan dicatat.
-        </p>
-      </div>
-    `;
-    panelEl.innerHTML = '';
-    return;
-  }
+  const fileName = currentFileName ? currentFileName.replace('.json', '') : 'soal';
+  const mapelName = fileName === 'soal' ? 'Default' : 
+                   fileName.charAt(0).toUpperCase() + fileName.slice(1);
+  
+  quizEl.innerHTML = `
+    <div style="padding: 20px; text-align: center;">
+      <h2>🎓 SELAMAT DATANG DI ASAS ONLINE</h2>
+      <p><strong>Mode Ujian Terkunci (Web Exam Browser)</strong></p>
+      <p><small>Paket Soal: <strong>${mapelName}</strong></small></p>
+      <p>Silakan isi nama dan atur waktu ujian, lalu klik <strong>"Mulai Tes"</strong>.</p>
+      <p>Saat ujian berjalan, layar akan terkunci dalam mode layar penuh.</p>
+      <p style="color: #e11d48; margin-top: 15px;">
+        ⚠️ <strong>Peringatan:</strong> Keluar dari layar ujian akan terdeteksi dan dicatat.
+      </p>
+    </div>
+  `;
+  panelEl.innerHTML = '';
+  return;
+}
 
   if (finished) {
     // Hasil akan ditampilkan di finishTest()
@@ -484,14 +498,15 @@ detailHtml += `
   });
   
   resultEl.innerHTML = `
-    <h2 style="text-align: center; color: #0e639c;">📊 HASIL TES</h2>
-    <div class="score-display">${total} / ${max} (${percent}%) — ${status}</div>
-    
-    <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-      <p><strong>👤 Nama Siswa:</strong> ${document.getElementById('namaSiswa').value}</p>
-      <p><strong>📅 Tanggal Ujian:</strong> ${new Date().toLocaleString('id-ID')}</p>
-      <p><strong>✅ Soal Terjawab:</strong> ${correctCount} dari ${questions.length}</p>
-    </div>
+  <h2 style="text-align: center; color: #0e639c;">📊 HASIL TES</h2>
+  <div class="score-display">${total} / ${max} (${percent}%) — ${status}</div>
+  
+  <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+    <p><strong>👤 Nama Siswa:</strong> ${document.getElementById('namaSiswa').value}</p>
+    <p><strong>📅 Tanggal Ujian:</strong> ${new Date().toLocaleString('id-ID')}</p>
+    <p><strong>📂 Paket Soal:</strong> ${currentFileName}</p>
+    <p><strong>✅ Soal Terjawab:</strong> ${correctCount} dari ${questions.length}</p>
+  </div>
     
     <h3>📝 Detail Jawaban</h3>
     <div style="max-height: 400px; overflow-y: auto; margin: 15px 0;">
@@ -517,6 +532,7 @@ function exportJawaban(){
     nama, 
     tanggal: new Date().toISOString(),
     waktuUjian: document.getElementById('setTime').value,
+    paketSoal: currentFileName || 'soal.json',
     totalSkor: questions.reduce((sum, q) => sum + calculateScore(q, answers[q.id]), 0),
     totalMaksimal: questions.reduce((sum, q) => sum + (q.score || q.maxScore || 1), 0),
     jawaban: answers,
@@ -527,13 +543,17 @@ function exportJawaban(){
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `jawaban_${nama.replace(/\s+/g,'_')}_${new Date().toISOString().split('T')[0]}.json`;
+  
+  // Nama file export: jawaban_nama_paket_tanggal.json
+  const exportFileName = `jawaban_${nama.replace(/\s+/g,'_')}_${(currentFileName || 'soal').replace('.json', '')}_${new Date().toISOString().split('T')[0]}.json`;
+  a.download = exportFileName;
+  
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
   
-  alert(`✅ Jawaban berhasil diekspor!\nFile: ${a.download}`);
+  alert(`✅ Jawaban berhasil diekspor!\nFile: ${exportFileName}`);
 }
 
 function downloadSoal(){ 
