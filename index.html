@@ -236,25 +236,77 @@ function finishTest() {
   clearInterval(timer);
   finished = true;
   
-  let total = 0, max = 0;
+  let total = 0, max = 0, correctCount = 0;
   questions.forEach(q => {
     const score = q.score || 1;
     max += score;
-    if (answers[q.id] === q.answer) total += score;
+    const sc = (answers[q.id] === q.answer) ? score : 0;
+    total += sc;
+    if (sc > 0) correctCount++;
   });
   
-  const percent = Math.round((total/max)*100);
+  const percent = max > 0 ? Math.round((total/max)*100) : 0;
+  const status = percent >= 70 ? "LULUS 🎉" : "TIDAK LULUS 💪";
+  
+  // Tampilkan hasil
   document.getElementById('quiz').style.display = 'none';
   document.getElementById('panel').style.display = 'none';
   
   const resultEl = document.getElementById('result');
   resultEl.style.display = 'block';
+  
+  // BUAT DETAIL JAWABAN
+  let detailHtml = '';
+  questions.forEach((q, index) => {
+    const a = answers[q.id];
+    const sc = (a === q.answer) ? (q.score || 1) : 0;
+    const maxScore = q.score || 1;
+    
+    let ansText = '';
+    if (q.type === 'multiple_choice') {
+      ansText = a !== undefined ? `${String.fromCharCode(65+a)}. ${q.choices[a]}` : 'Belum dijawab';
+    } else if (q.type === 'fill_blank') {
+      ansText = a || 'Belum dijawab';
+    } else if (q.type === 'essay') {
+      ansText = a ? (a.length > 100 ? a.substring(0, 100) + '...' : a) : 'Belum dijawab';
+    } else {
+      ansText = a !== undefined ? a : 'Belum dijawab';
+    }
+    
+    const correctAnswer = q.type === 'multiple_choice' 
+      ? `${String.fromCharCode(65+q.answer)}. ${q.choices[q.answer]}`
+      : q.answer;
+    
+    detailHtml += `
+      <div style="margin-bottom:15px; padding:15px; border:1px solid #e5e7eb; border-radius:8px; background:${sc > 0 ? '#f0fdf4' : '#fef2f2'}">
+        <strong>Soal ${index+1}:</strong> ${q.q}<br>
+        <strong>Jawaban Anda:</strong> ${ansText}<br>
+        <strong>Jawaban Benar:</strong> ${correctAnswer}<br>
+        <strong>Skor:</strong> ${sc}/${maxScore}
+      </div>
+    `;
+  });
+  
   resultEl.innerHTML = `
-    <h2>📊 HASIL TES</h2>
-    <div class="score-display">${total}/${max} (${percent}%)</div>
-    <p><strong>Nama:</strong> ${document.getElementById('namaSiswa').value}</p>
-    <p><strong>Paket Soal:</strong> ${currentFileName}</p>
-    <button onclick="location.reload()">🔄 Tes Baru</button>
+    <h2 style="text-align:center; color:#0e639c;">📊 HASIL TES</h2>
+    <div class="score-display">${total} / ${max} (${percent}%) — ${status}</div>
+    
+    <div style="background:#f8fafc; padding:15px; border-radius:8px; margin:15px 0;">
+      <p><strong>👤 Nama Siswa:</strong> ${document.getElementById('namaSiswa').value}</p>
+      <p><strong>📅 Tanggal:</strong> ${new Date().toLocaleString('id-ID')}</p>
+      <p><strong>📂 Paket Soal:</strong> ${currentFileName}</p>
+      <p><strong>✅ Soal Terjawab:</strong> ${correctCount} dari ${questions.length}</p>
+    </div>
+    
+    <h3>📝 Detail Jawaban</h3>
+    <div style="max-height:400px; overflow-y:auto; margin:15px 0;">
+      ${detailHtml}
+    </div>
+    
+    <div style="text-align:center; margin-top:20px;">
+      <button onclick="exportJawaban()" style="padding:12px 24px; background:#059669; margin:5px;">📥 Ekspor Jawaban</button>
+      <button onclick="location.reload()" style="padding:12px 24px; background:#0e639c; margin:5px;">🔄 Tes Baru</button>
+    </div>
   `;
 }
 
