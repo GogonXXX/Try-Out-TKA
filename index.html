@@ -180,7 +180,7 @@ function render() {
   if (q.type === 'multiple_choice') {
     q.choices.forEach((choice, i) => {
       const isSelected = answers[q.id] === i;
-      html += `<button onclick="selectChoice(${i})" style="display:block;width:100%;margin:8px 0;padding:12px;text-align:left;background:${isSelected?'#e0f2fe':'white'};border:2px solid ${isSelected?'#38bdf8':'#cbd5e1'};border-radius:8px">${String.fromCharCode(65+i)}. ${choice}</button>`;
+      html += `<button onclick="selectChoice(${i})" style="display:block;width:100%;margin:8px 0;padding:12px;text-align:left;background:${isSelected?'#e0f2fe':'white'};border:2px solid ${isSelected?'#38bdf8':'#cbd5e1'};border-radius:8px;color:#000000;">${String.fromCharCode(65+i)}. ${choice}</button>`;
     });
   }
   
