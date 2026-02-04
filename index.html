@@ -30,30 +30,28 @@
     .score-display { font-size: 22px; font-weight: 700; text-align: center; padding: 12px; margin: 12px 0; border-radius: 8px; background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; }
     .no-select { user-select: none; -webkit-user-select: none; -ms-user-select: none; }
     .answer-btn {
-  display: block;
-  width: 100%;
-  margin: 8px 0;
-  padding: 12px;
-  text-align: left;
-  background: #ffffff;
-  color: #000000;  /* TEKS WARNA HITAM */
-  border: 2px solid #cbd5e1;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.answer-btn:hover {
-  background: #f1f5f9;
-  color: #000000;  /* JAGA WARNA HITAM SAAT HOVER */
-}
-
-.answer-btn.active {
-  background: #e0f2fe;
-  color: #000000;  /* TEKS TETAP HITAM SAAT AKTIF */
-  border-color: #38bdf8;
-  font-weight: 700;
-}
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      text-align: left;
+      background: #ffffff;
+      color: #000000;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .answer-btn:hover {
+      background: #f1f5f9;
+      color: #000000;
+    }
+    .answer-btn.active {
+      background: #e0f2fe;
+      color: #000000;
+      border-color: #38bdf8;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body class="no-select">
@@ -228,8 +226,16 @@ function render() {
 }
 
 // ==================== FUNGSI NAVIGASI ====================
-function selectChoice(i) { answers[questions[current].id] = i; render(); saveProgress(); }
-function toggleMark() { marked[questions[current].id] = !marked[questions[current].id]; render(); saveProgress(); }
+function selectChoice(i) { 
+  answers[questions[current].id] = i; 
+  render(); 
+  saveProgress(); 
+}
+function toggleMark() { 
+  marked[questions[current].id] = !marked[questions[current].id]; 
+  render(); 
+  saveProgress(); 
+}
 function goto(i) { 
   if (i>=0 && i<questions.length) { 
     current = i; 
@@ -239,10 +245,12 @@ function goto(i) {
 }
 function updateFillBlank(v) { 
   answers[questions[current].id] = v; 
-  saveProgress();// SIMPAN SETIAP KETIK }
+  saveProgress();
+}
 function updateEssay(v) { 
   answers[questions[current].id] = v; 
-  saveProgress(); // SIMPAN SETIAP KETIK }
+  saveProgress(); 
+}
 function selectMultiple(i) {
   const qid = questions[current].id;
   if (!answers[qid]) answers[qid] = [];
@@ -256,11 +264,13 @@ function selectMultiple(i) {
   saveProgress();
 }
 
-
 // ==================== TIMER ====================
 function startTest() {
   const nama = document.getElementById('namaSiswa').value.trim();
-  if (!nama) { alert('Isi nama dulu!'); return; }
+  if (!nama) { 
+    alert('Isi nama dulu!'); 
+    return; 
+  }
   
   const menit = parseInt(document.getElementById('setTime').value) || 30;
   timeLeft = menit * 60;
@@ -275,7 +285,7 @@ function startTest() {
   }, 1000);
   
   alert(`Ujian dimulai! Nama: ${nama}, Waktu: ${menit} menit`);
-  saveProgress(); // <-- SIMPAN SETELAH START
+  saveProgress();
   render();
 }
 
@@ -284,6 +294,7 @@ function finishTest() {
   clearInterval(timer);
   finished = true;
   localStorage.removeItem(getStorageKey());
+  
   let total = 0, max = 0, correctCount = 0;
   questions.forEach(q => {
     const score = q.score || 1;
@@ -357,12 +368,14 @@ function finishTest() {
     </div>
   `;
 }
+
 // Simpan jawaban ke localStorage
 function getStorageKey() {
   const nama = document.getElementById('namaSiswa').value.trim() || 'guest';
   const mapel = currentFileName.replace('.json', '');
   return `examProgress_${mapel}_${nama}`;
 }
+
 function saveProgress() {
   if (!started || finished) return;
   
@@ -381,10 +394,9 @@ function saveProgress() {
   
   const key = getStorageKey();
   localStorage.setItem(key, JSON.stringify(progress));
-  
-  // DEBUG: tampilkan di console
   console.log('💾 Disimpan:', key, progress);
 }
+
 // Load jawaban dari localStorage
 function loadProgress() {
   const saved = localStorage.getItem(getStorageKey());
@@ -424,7 +436,7 @@ function loadProgress() {
     console.error('Gagal load progress:', e);
     return false;
   }
-}  // <-- TUTUP FUNGSI loadProgress() DI SINI
+} 
 
 function exportJawaban() {
   const nama = document.getElementById('namaSiswa').value.trim() || 'Anonim';
@@ -441,7 +453,7 @@ function exportJawaban() {
     } else {
       namaPaket = 'soal';
     }
-  }  // <-- TAMBAHKAN } YANG HILANG DI SINI
+  }
   
   // Data yang akan diekspor
   const data = { 
