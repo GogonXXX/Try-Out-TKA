@@ -85,6 +85,9 @@
 
 <script>
 // ==================== STATE ====================
+const quizEl = document.getElementById('quiz');
+const panelEl = document.getElementById('panel');
+
 let questions = [];
 let current = 0;
 let answers = {};
@@ -158,12 +161,12 @@ function render() {
   if (!started) {
     quizEl.innerHTML = `
       <h2>Siap mengerjakan?</h2>
-      <button onclick="start()">Mulai Tes</button>
+      <button onclick="startTest()">🚀 Mulai Tes</button>
     `;
+    panelEl.innerHTML = '';
     return;
   }
 
-  // ====== INI YANG KEMARIN HILANG ======
   const q = questions[current];
   let html = `
     <div style="margin-bottom:10px">
@@ -173,43 +176,48 @@ function render() {
       ${q.q}
     </div>
   `;
-  // ====================================
 
   if (q.type === "multiple_choice") {
     q.choices.forEach((c, i) => {
       html += `
-        <div>
-          <label>
-            <input type="radio" name="answer" value="${i}"
-              ${answers[current] == i ? "checked" : ""}>
-            ${c}
-          </label>
-        </div>
+        <button class="answer-btn ${answers[q.id]===i?'active':''}"
+          onclick="selectChoice(${i})">
+          ${String.fromCharCode(65+i)}. ${c}
+        </button>
       `;
     });
   } 
   else if (q.type === "fill_blank") {
-    html += `
-      <input type="text"
-        value="${answers[current] || ""}"
-        oninput="answers[current]=this.value">
-    `;
+    html += `<input type="text" value="${answers[q.id]||''}"
+      oninput="answers[q.id]=this.value">`;
   } 
   else if (q.type === "essay") {
-    html += `
-      <textarea rows="5"
-        oninput="answers[current]=this.value">${answers[current] || ""}</textarea>
-    `;
+    html += `<textarea rows="5"
+      oninput="answers[q.id]=this.value">${answers[q.id]||''}</textarea>`;
   }
 
   html += `
-    <div style="margin-top:20px">
-      <button onclick="prev()" ${current === 0 ? "disabled" : ""}>Sebelumnya</button>
-      <button onclick="next()" ${current === questions.length - 1 ? "disabled" : ""}>Berikutnya</button>
+    <div style="margin-top:20px;display:flex;gap:10px">
+      <button onclick="goto(${current-1})" ${current===0?'disabled':''}>⬅️</button>
+      <button onclick="toggleMark()">🚩 Tandai</button>
+      <button onclick="goto(${current+1})" ${current===questions.length-1?'disabled':''}>➡️</button>
+      <button onclick="finishTest()" style="background:#dc2626">✅ Kumpulkan</button>
     </div>
   `;
 
   quizEl.innerHTML = html;
+
+  // PANEL
+  let panelHtml = '<div class="panel-buttons">';
+  questions.forEach((_, i) => {
+    let cls = [];
+    if (answers[i] !== undefined) cls.push('answered');
+    if (marked[i]) cls.push('marked');
+    if (i === current) cls.push('current');
+    panelHtml += `<button onclick="goto(${i})" class="${cls.join(' ')}">${i+1}</button>`;
+  });
+  panelHtml += '</div>';
+  panelEl.innerHTML = panelHtml;
 }
 
   html += `<div style="margin-top:25px;display:flex;gap:10px">
