@@ -1,0 +1,360 @@
+{
+  "soal": [
+    {
+      "id": 1,
+      "type": "multiple_choice",
+      "q": "Bumi terbentuk dari kumpulan gas dan debu di angkasa yang disebut ...",
+      "choices": ["nebula", "galaksi", "asteroid", "komet"],
+      "answer": 0,
+      "score": 1,
+      "materi": "asal usul bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 2,
+      "type": "multiple_choice",
+      "q": "Bumi termasuk anggota dari sistem ...",
+      "choices": ["galaksi", "tata surya", "nebula", "rasi bintang"],
+      "answer": 1,
+      "score": 1,
+      "materi": "asal usul bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 3,
+      "type": "multiple_choice",
+      "q": "Gerakan Bumi berputar pada porosnya disebut ...",
+      "choices": ["revolusi", "rotasi", "orbit", "gravitasi"],
+      "answer": 1,
+      "score": 1,
+      "materi": "rotasi bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 4,
+      "type": "multiple_choice",
+      "q": "Akibat dari rotasi Bumi adalah terjadinya ...",
+      "choices": ["gerhana", "pergantian musim", "siang dan malam", "tahun kabisat"],
+      "answer": 2,
+      "score": 1,
+      "materi": "akibat rotasi bumi",
+      "kognitif": "C2"
+    },
+    {
+      "id": 5,
+      "type": "multiple_choice",
+      "q": "Gerakan Bumi mengelilingi Matahari disebut ...",
+      "choices": ["rotasi", "revolusi", "orbitasi", "gravitasi"],
+      "answer": 1,
+      "score": 1,
+      "materi": "revolusi bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 6,
+      "type": "multiple_choice",
+      "q": "Akibat dari revolusi Bumi adalah ...",
+      "choices": ["siang dan malam", "perbedaan waktu", "pergantian musim", "pasang surut air laut"],
+      "answer": 2,
+      "score": 1,
+      "materi": "akibat revolusi bumi",
+      "kognitif": "C2"
+    },
+    {
+      "id": 7,
+      "type": "multiple_choice",
+      "q": "Benda langit yang memancarkan cahaya sendiri disebut ...",
+      "choices": ["planet", "bulan", "bintang", "satelit"],
+      "answer": 2,
+      "score": 1,
+      "materi": "bintang",
+      "kognitif": "C1"
+    },
+    {
+      "id": 8,
+      "type": "multiple_choice",
+      "q": "Bumi mendapatkan cahaya dari bintang ...",
+      "choices": ["Sirius", "Polaris", "Matahari", "Vega"],
+      "answer": 2,
+      "score": 1,
+      "materi": "bintang",
+      "kognitif": "C1"
+    },
+    {
+      "id": 9,
+      "type": "multiple_choice",
+      "q": "Planet adalah benda langit yang ...",
+      "choices": [
+        "memancarkan cahaya sendiri",
+        "mengelilingi bintang",
+        "berekor panjang",
+        "bercahaya di malam hari"
+      ],
+      "answer": 1,
+      "score": 1,
+      "materi": "planet",
+      "kognitif": "C2"
+    },
+    {
+      "id": 10,
+      "type": "multiple_choice",
+      "q": "Benda langit kecil berbatu yang mengelilingi Matahari disebut ...",
+      "choices": ["komet", "asteroid", "planet", "satelit"],
+      "answer": 1,
+      "score": 1,
+      "materi": "asteroid",
+      "kognitif": "C1"
+    },
+    {
+      "id": 11,
+      "type": "multiple_choice",
+      "q": "Meteoroid yang jatuh ke permukaan Bumi disebut ...",
+      "choices": ["meteor", "asteroid", "meteorit", "komet"],
+      "answer": 2,
+      "score": 1,
+      "materi": "meteoroid",
+      "kognitif": "C2"
+    },
+    {
+      "id": 12,
+      "type": "multiple_choice",
+      "q": "Benda langit yang memiliki ekor dan mengelilingi Matahari disebut ...",
+      "choices": ["asteroid", "komet", "meteor", "planet"],
+      "answer": 1,
+      "score": 1,
+      "materi": "komet",
+      "kognitif": "C1"
+    },
+    {
+      "id": 13,
+      "type": "multiple_choice",
+      "q": "Satelit alami Bumi adalah ...",
+      "choices": ["Matahari", "Mars", "Bulan", "Venus"],
+      "answer": 2,
+      "score": 1,
+      "materi": "satelit",
+      "kognitif": "C1"
+    },
+    {
+      "id": 14,
+      "type": "multiple_choice",
+      "q": "Contoh satelit buatan adalah ...",
+      "choices": ["Bulan", "Matahari", "Palapa", "Mars"],
+      "answer": 2,
+      "score": 1,
+      "materi": "satelit",
+      "kognitif": "C2"
+    },
+    {
+      "id": 15,
+      "type": "multiple_choice",
+      "q": "Satu kali rotasi Bumi memerlukan waktu sekitar ...",
+      "choices": ["12 jam", "24 jam", "30 hari", "365 hari"],
+      "answer": 1,
+      "score": 1,
+      "materi": "rotasi bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 16,
+      "type": "multiple_choice",
+      "q": "Satu kali revolusi Bumi memerlukan waktu sekitar ...",
+      "choices": ["24 jam", "30 hari", "365 hari", "12 jam"],
+      "answer": 2,
+      "score": 1,
+      "materi": "revolusi bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 17,
+      "type": "multiple_choice",
+      "q": "Perbedaan waktu di berbagai daerah disebabkan oleh ...",
+      "choices": ["revolusi bumi", "rotasi bumi", "gravitasi", "orbit bulan"],
+      "answer": 1,
+      "score": 1,
+      "materi": "akibat rotasi bumi",
+      "kognitif": "C2"
+    },
+    {
+      "id": 18,
+      "type": "multiple_choice",
+      "q": "Planet tempat manusia tinggal adalah ...",
+      "choices": ["Mars", "Venus", "Bumi", "Jupiter"],
+      "answer": 2,
+      "score": 1,
+      "materi": "planet",
+      "kognitif": "C1"
+    },
+    {
+      "id": 19,
+      "type": "multiple_choice",
+      "q": "Kumpulan benda langit yang terikat oleh gaya gravitasi disebut ...",
+      "choices": ["nebula", "galaksi", "tata surya", "asteroid"],
+      "answer": 2,
+      "score": 1,
+      "materi": "tata surya",
+      "kognitif": "C2"
+    },
+    {
+      "id": 20,
+      "type": "multiple_choice",
+      "q": "Matahari termasuk benda langit jenis ...",
+      "choices": ["planet", "satelit", "bintang", "asteroid"],
+      "answer": 2,
+      "score": 1,
+      "materi": "bintang",
+      "kognitif": "C1"
+    },
+
+    {
+      "id": 21,
+      "type": "fill_blank",
+      "q": "Gerakan Bumi berputar pada porosnya disebut ...",
+      "answer": "rotasi",
+      "acceptable_answers": ["rotasi"],
+      "score": 1,
+      "materi": "rotasi bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 22,
+      "type": "fill_blank",
+      "q": "Akibat dari rotasi Bumi adalah terjadinya siang dan ...",
+      "answer": "malam",
+      "acceptable_answers": ["malam"],
+      "score": 1,
+      "materi": "akibat rotasi bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 23,
+      "type": "fill_blank",
+      "q": "Gerakan Bumi mengelilingi Matahari disebut ...",
+      "answer": "revolusi",
+      "acceptable_answers": ["revolusi"],
+      "score": 1,
+      "materi": "revolusi bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 24,
+      "type": "fill_blank",
+      "q": "Pergantian musim terjadi akibat ... Bumi.",
+      "answer": "revolusi",
+      "acceptable_answers": ["revolusi"],
+      "score": 1,
+      "materi": "akibat revolusi bumi",
+      "kognitif": "C2"
+    },
+    {
+      "id": 25,
+      "type": "fill_blank",
+      "q": "Benda langit yang memancarkan cahaya sendiri disebut ...",
+      "answer": "bintang",
+      "acceptable_answers": ["bintang"],
+      "score": 1,
+      "materi": "bintang",
+      "kognitif": "C1"
+    },
+    {
+      "id": 26,
+      "type": "fill_blank",
+      "q": "Planet yang menjadi tempat tinggal manusia adalah ...",
+      "answer": "bumi",
+      "acceptable_answers": ["bumi"],
+      "score": 1,
+      "materi": "planet",
+      "kognitif": "C1"
+    },
+    {
+      "id": 27,
+      "type": "fill_blank",
+      "q": "Bulan merupakan satelit ... Bumi.",
+      "answer": "alami",
+      "acceptable_answers": ["alami"],
+      "score": 1,
+      "materi": "satelit",
+      "kognitif": "C1"
+    },
+    {
+      "id": 28,
+      "type": "fill_blank",
+      "q": "Benda langit kecil berbatu yang mengelilingi Matahari disebut ...",
+      "answer": "asteroid",
+      "acceptable_answers": ["asteroid"],
+      "score": 1,
+      "materi": "asteroid",
+      "kognitif": "C1"
+    },
+    {
+      "id": 29,
+      "type": "fill_blank",
+      "q": "Meteoroid yang jatuh ke permukaan Bumi disebut ...",
+      "answer": "meteorit",
+      "acceptable_answers": ["meteorit"],
+      "score": 1,
+      "materi": "meteoroid",
+      "kognitif": "C2"
+    },
+    {
+      "id": 30,
+      "type": "fill_blank",
+      "q": "Komet memiliki ciri khas berupa ...",
+      "answer": "ekor",
+      "acceptable_answers": ["ekor"],
+      "score": 1,
+      "materi": "komet",
+      "kognitif": "C1"
+    },
+    {
+      "id": 31,
+      "type": "fill_blank",
+      "q": "Satu kali rotasi Bumi memerlukan waktu sekitar ... jam.",
+      "answer": "24",
+      "acceptable_answers": ["24", "dua puluh empat"],
+      "score": 1,
+      "materi": "rotasi bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 32,
+      "type": "fill_blank",
+      "q": "Satu kali revolusi Bumi memerlukan waktu sekitar ... hari.",
+      "answer": "365",
+      "acceptable_answers": ["365", "tiga ratus enam puluh lima"],
+      "score": 1,
+      "materi": "revolusi bumi",
+      "kognitif": "C1"
+    },
+    {
+      "id": 33,
+      "type": "fill_blank",
+      "q": "Matahari adalah pusat dari sistem ...",
+      "answer": "tata surya",
+      "acceptable_answers": ["tata surya"],
+      "score": 1,
+      "materi": "tata surya",
+      "kognitif": "C2"
+    },
+    {
+      "id": 34,
+      "type": "fill_blank",
+      "q": "Benda langit yang mengelilingi planet disebut ...",
+      "answer": "satelit",
+      "acceptable_answers": ["satelit"],
+      "score": 1,
+      "materi": "satelit",
+      "kognitif": "C1"
+    },
+    {
+      "id": 35,
+      "type": "fill_blank",
+      "q": "Asal-usul Bumi berkaitan dengan pembentukan ... di angkasa.",
+      "answer": "tata surya",
+      "acceptable_answers": ["tata surya"],
+      "score": 1,
+      "materi": "asal usul bumi",
+      "kognitif": "C3"
+    }
+  ]
+}
