@@ -155,69 +155,63 @@ function processData(data, fileName) {
 
 // ==================== RENDER ====================
 function render() {
-  const quizEl = document.getElementById('quiz');
-  const panelEl = document.getElementById('panel');
-  
   if (!started) {
-    const mapelName = currentFileName.replace('.json', '');
     quizEl.innerHTML = `
-      <div style="padding:20px;text-align:center">
-        <h2>🎓 SELAMAT DATANG</h2>
-        <p><strong>Paket Soal:</strong> ${mapelName}</p>
-        <p>Isi nama dan waktu, lalu klik <strong>"Mulai Tes"</strong>.</p>
-      </div>
+      <h2>Siap mengerjakan?</h2>
+      <button onclick="start()">Mulai Tes</button>
     `;
-    panelEl.innerHTML = '';
     return;
   }
-  
-if (q.type === 'multiple_choice') {
-  q.choices.forEach((choice, i) => {
-    const isSelected = answers[q.id] === i;
-    html += `
-      <button onclick="selectChoice(${i})"
-        class="answer-btn ${isSelected ? 'active' : ''}">
-        ${String.fromCharCode(65+i)}. ${choice}
-      </button>`;
-  });
 
-} else if (q.type === 'fill_blank') {
+  // ====== INI YANG KEMARIN HILANG ======
+  const q = questions[current];
+  let html = `
+    <div style="margin-bottom:10px">
+      <strong>Soal ${current + 1} dari ${questions.length}</strong>
+    </div>
+    <div style="margin-bottom:15px">
+      ${q.q}
+    </div>
+  `;
+  // ====================================
+
+  if (q.type === "multiple_choice") {
+    q.choices.forEach((c, i) => {
+      html += `
+        <div>
+          <label>
+            <input type="radio" name="answer" value="${i}"
+              ${answers[current] == i ? "checked" : ""}>
+            ${c}
+          </label>
+        </div>
+      `;
+    });
+  } 
+  else if (q.type === "fill_blank") {
+    html += `
+      <input type="text"
+        value="${answers[current] || ""}"
+        oninput="answers[current]=this.value">
+    `;
+  } 
+  else if (q.type === "essay") {
+    html += `
+      <textarea rows="5"
+        oninput="answers[current]=this.value">${answers[current] || ""}</textarea>
+    `;
+  }
+
   html += `
-    <div style="margin-top:15px">
-      <input
-        type="text"
-        placeholder="Ketik jawaban di sini..."
-        value="${answers[q.id] || ''}"
-        oninput="answers[${q.id}] = this.value"
-        style="
-          width:100%;
-          padding:12px;
-          font-size:16px;
-          border-radius:8px;
-          border:2px solid #cbd5e1;
-        "
-      />
+    <div style="margin-top:20px">
+      <button onclick="prev()" ${current === 0 ? "disabled" : ""}>Sebelumnya</button>
+      <button onclick="next()" ${current === questions.length - 1 ? "disabled" : ""}>Berikutnya</button>
     </div>
   `;
 
-} else if (q.type === 'essay') {
-  html += `
-    <textarea
-      placeholder="Tulis jawaban di sini..."
-      oninput="answers[${q.id}] = this.value"
-      style="
-        width:100%;
-        min-height:120px;
-        padding:12px;
-        font-size:16px;
-        border-radius:8px;
-        border:2px solid #cbd5e1;
-      "
-    >${answers[q.id] || ''}</textarea>
-  `;
+  quizEl.innerHTML = html;
 }
 
-  
   html += `<div style="margin-top:25px;display:flex;gap:10px">
     <button onclick="goto(${current-1})" ${current===0?'disabled':''}>⬅️</button>
     <button onclick="toggleMark()">${marked[q.id]?'✓ Ditandai':'🚩 Tandai'}</button>
