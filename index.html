@@ -84,315 +84,151 @@
   </div>
 
 <script>
-// ==================== STATE ====================
+/* ================== STATE ================== */
 const quizEl = document.getElementById('quiz');
 const panelEl = document.getElementById('panel');
+const resultEl = document.getElementById('result');
 
 let questions = [];
-let current = 0;
+let currentIndex = 0;
 let answers = {};
-let marked = {};
-let started = false;
-let finished = false;
 let timer = null;
 let timeLeft = 0;
-let currentFileName = '';
+let currentFileName = 'soal.json';
 
-// ==================== LOAD SOAL ====================
+/* ================== LOAD SOAL ================== */
 async function loadSoalJSON() {
-  // Ambil parameter ?mapel=...
-  const urlParams = new URLSearchParams(window.location.search);
-  const mapel = urlParams.get('mapel');
-  
-  // Tentukan file yang akan di-load
-  let fileToLoad = 'soal.json';
-  if (mapel) {
-    // Format 1: dengan spasi (sesuai nama file di repo)
-    fileToLoad = `${mapel}.json`;
-  }
-  
-  // Coba load file utama
   try {
-    const response = await fetch(`./${fileToLoad}`);
-    if (response.ok) {
-      const data = await response.json();
-      processData(data, fileToLoad);
-      return;
-    }
-  } catch (err) {
-    console.log('Gagal load file utama:', err.message);
-  }
-  
-  // Jika gagal, coba encode spasi (%20)
-  if (mapel) {
-    const encodedFile = `${encodeURIComponent(mapel)}.json`;
-    try {
-      const encodedResponse = await fetch(`./${encodedFile}`);
-      if (encodedResponse.ok) {
-        const data = await encodedResponse.json();
-        processData(data, encodedFile);
-        return;
-      }
-    } catch (err) {
-      console.log('Gagal load encoded file:', err.message);
-    }
-  }
-  
-  // Fallback ke soal.json
-  try {
-    const fallback = await fetch('./soal.json');
-    const data = await fallback.json();
-    processData(data, 'soal.json');
-  } catch (err) {
-    alert('❌ Gagal memuat soal. Pastikan file soal.json ada.');
+    const res = await fetch('./soal.json');
+    const data = await res.json();
+    questions = Array.isArray(data.soal) ? data.soal : data;
+    renderQuestion();
+  } catch (e) {
+    alert('❌ soal.json tidak bisa dimuat');
   }
 }
 
-function processData(data, fileName) {
-  questions = Array.isArray(data) ? data : 
-             (Array.isArray(data.soal) ? data.soal : []);
-  currentFileName = fileName;
-  console.log(`✅ ${questions.length} soal dimuat dari ${fileName}`);
-  render();
-}
+/* ================== RENDER ================== */
+function renderQuestion() {
+  const q = questions[currentIndex];
+  if (!q) return;
 
-// ==================== RENDER ====================
-function render() {
-  if (!started) {
-    quizEl.innerHTML = `
-      <h2>Siap mengerjakan?</h2>
-      <button onclick="startTest()">🚀 Mulai Tes</button>
-    `;
-    panelEl.innerHTML = '';
-    return;
-  }
+  let html = `<div class="q-text">${q.q}</div>`;
 
-  const q = questions[current];
-  let html = `
-    <div style="margin-bottom:10px">
-      <strong>Soal ${current + 1} dari ${questions.length}</strong>
-    </div>
-    <div style="margin-bottom:15px">
-      ${q.q}
-    </div>
-  `;
-
-  if (q.type === "multiple_choice") {
+  // PILIHAN GANDA
+  if (q.type === 'multiple_choice') {
     q.choices.forEach((c, i) => {
+      const active = answers[q.id] === i ? 'active' : '';
       html += `
-        <button class="answer-btn ${answers[q.id]===i?'active':''}"
-          onclick="selectChoice(${i})">
-          ${String.fromCharCode(65+i)}. ${c}
-        </button>
+        <button class="answer-btn ${active}"
+        onclick="answerPG(${q.id}, ${i})">${c}</button>
       `;
     });
-  } 
-  else if (q.type === "fill_blank") {
-    html += `<input type="text" value="${answers[q.id]||''}"
-      oninput="answers[q.id]=this.value">`;
-  } 
-  else if (q.type === "essay") {
-    html += `<textarea rows="5"
-      oninput="answers[q.id]=this.value">${answers[q.id]||''}</textarea>`;
   }
 
-  html += `
-    <div style="margin-top:20px;display:flex;gap:10px">
-      <button onclick="goto(${current-1})" ${current===0?'disabled':''}>⬅️</button>
-      <button onclick="toggleMark()">🚩 Tandai</button>
-      <button onclick="goto(${current+1})" ${current===questions.length-1?'disabled':''}>➡️</button>
-      <button onclick="finishTest()" style="background:#dc2626">✅ Kumpulkan</button>
-    </div>
-  `;
+  // ISIAN
+  if (q.type === 'fill_blank') {
+    html += `
+      <input type="text"
+      value="${answers[q.id] || ''}"
+      oninput="answerText(${q.id}, this.value)">
+    `;
+  }
+
+  // ESAI
+  if (q.type === 'essay') {
+    html += `
+      <textarea
+      oninput="answerText(${q.id}, this.value)">${answers[q.id] || ''}</textarea>
+    `;
+  }
 
   quizEl.innerHTML = html;
-
-  // PANEL
-  let panelHtml = '<div class="panel-buttons">';
-  questions.forEach((_, i) => {
-    let cls = [];
-    if (answers[i] !== undefined) cls.push('answered');
-    if (marked[i]) cls.push('marked');
-    if (i === current) cls.push('current');
-    panelHtml += `<button onclick="goto(${i})" class="${cls.join(' ')}">${i+1}</button>`;
-  });
-  panelHtml += '</div>';
-  panelEl.innerHTML = panelHtml;
 }
 
-  html += `<div style="margin-top:25px;display:flex;gap:10px">
-    <button onclick="goto(${current-1})" ${current===0?'disabled':''}>⬅️</button>
-    <button onclick="toggleMark()">${marked[q.id]?'✓ Ditandai':'🚩 Tandai'}</button>
-    <button onclick="goto(${current+1})" ${current===questions.length-1?'disabled':''}>➡️</button>
-    <button onclick="finishTest()" style="background:#dc2626">✅ Kumpulkan</button>
-  </div>`;
-  
-  quizEl.innerHTML = html;
-  
-  // Panel navigasi
-  let panelHtml = '<div class="panel-buttons">';
-  questions.forEach((q, i) => {
-    let cls = [];
-    if (answers[q.id] !== undefined) cls.push('answered');
-    if (marked[q.id]) cls.push('marked');
-    if (i === current) cls.push('current');
-    panelHtml += `<button onclick="goto(${i})" class="${cls.join(' ')}">${i+1}</button>`;
-  });
-  panelHtml += '</div>';
-  panelEl.innerHTML = panelHtml;
+/* ================== JAWABAN ================== */
+function answerPG(id, val) {
+  answers[id] = val;
+  renderQuestion();
 }
 
-// ==================== FUNGSI NAVIGASI ====================
-function selectChoice(i) { answers[questions[current].id] = i; render(); }
-function toggleMark() { marked[questions[current].id] = !marked[questions[current].id]; render(); }
-function goto(i) { if (i>=0 && i<questions.length) { current = i; render(); } }
+function answerText(id, val) {
+  answers[id] = val;
+}
 
-// ==================== TIMER ====================
+/* ================== NAVIGASI ================== */
+function goto(index) {
+  if (index >= 0 && index < questions.length) {
+    currentIndex = index;
+    renderQuestion();
+  }
+}
+
+/* ================== TIMER ================== */
 function startTest() {
   const nama = document.getElementById('namaSiswa').value.trim();
-  if (!nama) { alert('Isi nama dulu!'); return; }
-  
+  if (!nama) return alert('Isi nama dulu');
+
   const menit = parseInt(document.getElementById('setTime').value) || 30;
   timeLeft = menit * 60;
-  started = true;
-  
+
   clearInterval(timer);
   timer = setInterval(() => {
     timeLeft--;
     if (timeLeft <= 0) finishTest();
-    render();
   }, 1000);
-  
-  alert(`Ujian dimulai! Nama: ${nama}, Waktu: ${menit} menit`);
-  render();
+
+  alert('Ujian dimulai');
 }
 
+/* ================== SELESAI ================== */
 function finishTest() {
-  if (!confirm('Yakin kumpulkan?')) return;
   clearInterval(timer);
-  finished = true;
-  
-  let total = 0, max = 0, correctCount = 0;
+
+  quizEl.style.display = 'none';
+  panelEl.style.display = 'none';
+  resultEl.style.display = 'block';
+
+  let total = 0;
+  let max = 0;
+
   questions.forEach(q => {
     const score = q.score || 1;
     max += score;
-    const sc = (answers[q.id] === q.answer) ? score : 0;
-    total += sc;
-    if (sc > 0) correctCount++;
+    if (answers[q.id] === q.answer) total += score;
   });
-  
-  const percent = max > 0 ? Math.round((total/max)*100) : 0;
-  const status = percent >= 70 ? "LULUS 🎉" : "TIDAK LULUS 💪";
-  
-  // Tampilkan hasil
-  document.getElementById('quiz').style.display = 'none';
-  document.getElementById('panel').style.display = 'none';
-  
-  const resultEl = document.getElementById('result');
-  resultEl.style.display = 'block';
-  
-  // BUAT DETAIL JAWABAN
-  let detailHtml = '';
-  questions.forEach((q, index) => {
-    const a = answers[q.id];
-    const sc = (a === q.answer) ? (q.score || 1) : 0;
-    const maxScore = q.score || 1;
-    
-    let ansText = '';
-    if (q.type === 'multiple_choice') {
-      ansText = a !== undefined ? `${String.fromCharCode(65+a)}. ${q.choices[a]}` : 'Belum dijawab';
-    } else if (q.type === 'fill_blank') {
-      ansText = a || 'Belum dijawab';
-    } else if (q.type === 'essay') {
-      ansText = a ? (a.length > 100 ? a.substring(0, 100) + '...' : a) : 'Belum dijawab';
-    } else {
-      ansText = a !== undefined ? a : 'Belum dijawab';
-    }
-    
-    const correctAnswer = q.type === 'multiple_choice' 
-      ? `${String.fromCharCode(65+q.answer)}. ${q.choices[q.answer]}`
-      : q.answer;
-    
-    detailHtml += `
-      <div style="margin-bottom:15px; padding:15px; border:1px solid #e5e7eb; border-radius:8px; background:${sc > 0 ? '#f0fdf4' : '#fef2f2'}">
-        <strong>Soal ${index+1}:</strong> ${q.q}<br>
-        <strong>Jawaban Anda:</strong> ${ansText}<br>
-        <strong>Jawaban Benar:</strong> ${correctAnswer}<br>
-        <strong>Skor:</strong> ${sc}/${maxScore}
-      </div>
-    `;
-  });
-  
+
   resultEl.innerHTML = `
-    <h2 style="text-align:center; color:#0e639c;">📊 HASIL TES</h2>
-    <div class="score-display">${total} / ${max} (${percent}%) — ${status}</div>
-    
-    <div style="background:#f8fafc; padding:15px; border-radius:8px; margin:15px 0;">
-      <p><strong>👤 Nama Siswa:</strong> ${document.getElementById('namaSiswa').value}</p>
-      <p><strong>📅 Tanggal:</strong> ${new Date().toLocaleString('id-ID')}</p>
-      <p><strong>📂 Paket Soal:</strong> ${currentFileName}</p>
-      <p><strong>✅ Soal Terjawab:</strong> ${correctCount} dari ${questions.length}</p>
-    </div>
-    
-    <h3>📝 Detail Jawaban</h3>
-    <div style="max-height:400px; overflow-y:auto; margin:15px 0;">
-      ${detailHtml}
-    </div>
-    
-    <div style="text-align:center; margin-top:20px;">
-      <button onclick="exportJawaban()" style="padding:12px 24px; background:#059669; margin:5px;">📥 Ekspor Jawaban</button>
-      <button onclick="location.reload()" style="padding:12px 24px; background:#0e639c; margin:5px;">🔄 Tes Baru</button>
-    </div>
+    <h2>HASIL TES</h2>
+    <p>Skor: ${total} / ${max}</p>
+    <button onclick="exportJawaban()">Ekspor Jawaban</button>
+    <button onclick="location.reload()">Ulangi</button>
   `;
 }
 
+/* ================== EXPORT ================== */
 function exportJawaban() {
-  const nama = document.getElementById('namaSiswa').value.trim() || 'Anonim';
-  
-  // Ambil nama paket dari currentFileName (tanpa .json)
-  let namaPaket = currentFileName.replace('.json', '');
-  
-  // Jika currentFileName kosong atau default, ambil dari URL parameter
-  if (!namaPaket || namaPaket === 'soal') {
-    const urlParams = new URLSearchParams(window.location.search);
-    const mapelParam = urlParams.get('mapel');
-    if (mapelParam) {
-      namaPaket = mapelParam;
-    } else {
-      namaPaket = 'soal';
-    }
-  }
-  
-  // Data yang akan diekspor
-  const data = { 
-    nama, 
+  const nama = document.getElementById('namaSiswa').value || 'Anonim';
+
+  const data = {
+    nama,
     tanggal: new Date().toISOString(),
-    waktuUjian: document.getElementById('setTime').value,
-    paketSoal: namaPaket,
-    totalSkor: questions.reduce((sum, q) => sum + (answers[q.id] === q.answer ? (q.score || 1) : 0), 0),
-    totalMaksimal: questions.reduce((sum, q) => sum + (q.score || 1), 0),
     jawaban: answers,
-    soal: questions 
+    soal: questions
   };
-  
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
+
   const a = document.createElement('a');
   a.href = url;
-  
-  // NAMA FILE: Jawaban_namasiswa_namapaket.json
-  const namaFile = `Jawaban_${nama.replace(/\s+/g,'_')}_${namaPaket.replace(/\s+/g,'_')}.json`;
-  a.download = namaFile;
-  
-  document.body.appendChild(a);
+  a.download = `Jawaban_${nama.replace(/\s+/g,'_')}.json`;
   a.click();
-  document.body.removeChild(a);
+
   URL.revokeObjectURL(url);
-  
-  alert(`✅ Jawaban berhasil diekspor!\nFile: ${namaFile}`);
 }
 
-// ==================== INIT ====================
+/* ================== INIT ================== */
 document.addEventListener('DOMContentLoaded', loadSoalJSON);
 </script>
 </body>
