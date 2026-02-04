@@ -182,10 +182,26 @@ function render() {
   let html = `<div class="time">⏳ Sisa: ${Math.floor(timeLeft/60)}:${String(timeLeft%60).padStart(2,'0')}</div>`;
   html += `<div style="font-size:18px;margin-bottom:20px"><strong>Soal ${current+1}/${questions.length}:</strong> ${q.q}</div>`;
   
+  // TAMPILKAN BERDASARKAN TIPE SOAL
   if (q.type === 'multiple_choice') {
     q.choices.forEach((choice, i) => {
       const isSelected = answers[q.id] === i;
       html += `<button onclick="selectChoice(${i})" style="display:block;width:100%;margin:8px 0;padding:12px;text-align:left;background:${isSelected?'#e0f2fe':'white'};border:2px solid ${isSelected?'#38bdf8':'#cbd5e1'};border-radius:8px;color:#000000;">${String.fromCharCode(65+i)}. ${choice}</button>`;
+    });
+  } 
+  else if (q.type === 'fill_blank') {
+    html += `<input type="text" placeholder="Ketik jawaban Anda..." value="${answers[q.id] || ''}" oninput="updateFillBlank(this.value)" style="width:100%;padding:12px;font-size:16px;border:2px solid #0e639c;border-radius:6px;">`;
+  }
+  else if (q.type === 'essay') {
+    html += `<textarea placeholder="Tulis jawaban uraian..." oninput="updateEssay(this.value)" style="width:100%;min-height:150px;padding:12px;font-size:16px;border:2px solid #0e639c;border-radius:6px;">${answers[q.id] || ''}</textarea>`;
+  }
+  else if (q.type === 'multiple_answer') {
+    q.choices.forEach((choice, i) => {
+      const isChecked = answers[q.id] && answers[q.id].includes(i);
+      html += `<label style="display:block;margin:10px 0;padding:8px;border-radius:6px;background:${isChecked?'#f0f9ff':'transparent'}">
+                <input type="checkbox" ${isChecked?'checked':''} onchange="selectMultiple(${i})" style="margin-right:10px;">
+                ${String.fromCharCode(65+i)}. ${choice}
+              </label>`;
     });
   }
   
@@ -202,7 +218,7 @@ function render() {
   let panelHtml = '<div class="panel-buttons">';
   questions.forEach((q, i) => {
     let cls = [];
-    if (answers[q.id] !== undefined) cls.push('answered');
+    if (answers[q.id] !== undefined && answers[q.id] !== '') cls.push('answered');
     if (marked[q.id]) cls.push('marked');
     if (i === current) cls.push('current');
     panelHtml += `<button onclick="goto(${i})" class="${cls.join(' ')}">${i+1}</button>`;
@@ -227,7 +243,18 @@ function updateFillBlank(v) {
 function updateEssay(v) { 
   answers[questions[current].id] = v; 
   saveProgress(); }
-
+function selectMultiple(i) {
+  const qid = questions[current].id;
+  if (!answers[qid]) answers[qid] = [];
+  const idx = answers[qid].indexOf(i);
+  if (idx === -1) {
+    answers[qid].push(i);
+  } else {
+    answers[qid].splice(idx, 1);
+  }
+  render();
+  saveProgress();
+}
 
 
 // ==================== TIMER ====================
@@ -255,7 +282,7 @@ function finishTest() {
   if (!confirm('Yakin kumpulkan?')) return;
   clearInterval(timer);
   finished = true;
-  localStorage.removeItem('examProgress');
+  localStorage.removeItem(getStorageKey());
   let total = 0, max = 0, correctCount = 0;
   questions.forEach(q => {
     const score = q.score || 1;
@@ -330,7 +357,14 @@ function finishTest() {
   `;
 }
 // Simpan jawaban ke localStorage
+function getStorageKey() {
+  const nama = document.getElementById('namaSiswa').value.trim() || 'guest';
+  const mapel = currentFileName.replace('.json', '');
+  return `examProgress_${mapel}_${nama}`;
+}
 function saveProgress() {
+  if (!started || finished) return;
+  
   const progress = {
     answers: answers,
     marked: marked,
@@ -340,23 +374,28 @@ function saveProgress() {
     finished: finished,
     currentFileName: currentFileName,
     namaSiswa: document.getElementById('namaSiswa').value,
-    setTime: document.getElementById('setTime').value
+    setTime: document.getElementById('setTime').value,
+    timestamp: Date.now()
   };
   
-  // SIMPAN KE LOCALSTORAGE
-  localStorage.setItem('examProgress', JSON.stringify(progress));
+  localStorage.setItem(getStorageKey(), JSON.stringify(progress));
 }
 // Load jawaban dari localStorage
 function loadProgress() {
-  const saved = localStorage.getItem('examProgress');
+  const saved = localStorage.getItem(getStorageKey());
   if (!saved) return false;
   
   try {
     const progress = JSON.parse(saved);
     
+    // Cek jika data kadaluarsa (lebih dari 24 jam)
+    if (Date.now() - progress.timestamp > 24 * 60 * 60 * 1000) {
+      localStorage.removeItem(getStorageKey());
+      return false;
+    }
+    
     // Cek jika paket soal sama
     if (progress.currentFileName !== currentFileName) {
-      console.log('Paket soal berbeda, reset progress');
       return false;
     }
     
@@ -374,12 +413,13 @@ function loadProgress() {
       document.getElementById('setTime').value = progress.setTime;
     }
     
-    console.log('📂 Progress dimuat');
+    console.log('📂 Progress dimuat untuk', progress.namaSiswa);
     return true;
   } catch (e) {
     console.error('Gagal load progress:', e);
     return false;
   }
+}
 }
 function exportJawaban() {
   const nama = document.getElementById('namaSiswa').value.trim() || 'Anonim';
