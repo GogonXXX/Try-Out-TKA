@@ -3,378 +3,358 @@
     {
       "id": 1,
       "type": "multiple_choice",
-      "q": "Bagian tubuh manusia yang berfungsi sebagai penyangga tubuh dan tempat melekatnya otot adalah ...",
-      "choices": ["Otot", "Sendi", "Rangka", "Tulang rawan"],
-      "answer": 2,
+      "q": "Bumi terbentuk dari kumpulan gas dan debu di angkasa yang disebut ...",
+      "choices": ["nebula", "galaksi", "asteroid", "komet"],
+      "answer": 0,
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "asal usul bumi",
       "kognitif": "C1"
     },
     {
       "id": 2,
       "type": "multiple_choice",
-      "q": "Tulang yang termasuk dalam kelompok tulang anggota gerak atas adalah ...",
-      "choices": ["Tulang paha", "Tulang betis", "Tulang hasta", "Tulang kering"],
-      "answer": 2,
+      "q": "Bumi termasuk anggota dari sistem ...",
+      "choices": ["galaksi", "tata surya", "nebula", "rasi bintang"],
+      "answer": 1,
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "asal usul bumi",
       "kognitif": "C1"
     },
     {
       "id": 3,
       "type": "multiple_choice",
-      "q": "Sendi yang memungkinkan gerakan ke segala arah terdapat pada ...",
-      "choices": ["Lutut", "Siku", "Pinggul", "Pergelangan tangan"],
-      "answer": 2,
+      "q": "Gerakan Bumi berputar pada porosnya disebut ...",
+      "choices": ["revolusi", "rotasi", "orbit", "gravitasi"],
+      "answer": 1,
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "rotasi bumi",
       "kognitif": "C1"
     },
     {
       "id": 4,
       "type": "multiple_choice",
-      "q": "Otot yang bekerja tanpa disadari dan terdapat pada organ dalam disebut otot ...",
-      "choices": ["Lurik", "Jantung", "Polos", "Rangka"],
+      "q": "Akibat dari rotasi Bumi adalah terjadinya ...",
+      "choices": ["gerhana", "pergantian musim", "siang dan malam", "tahun kabisat"],
       "answer": 2,
       "score": 1,
-      "materi": "alat gerak manusia",
-      "kognitif": "C1"
+      "materi": "akibat rotasi bumi",
+      "kognitif": "C2"
     },
     {
       "id": 5,
       "type": "multiple_choice",
-      "q": "Hubungan antara tulang yang memungkinkan sedikit gerakan seperti pada tulang rusuk adalah sendi ...",
-      "choices": ["Peluru", "Engsel", "Pelana", "Kaku"],
-      "answer": 3,
+      "q": "Gerakan Bumi mengelilingi Matahari disebut ...",
+      "choices": ["rotasi", "revolusi", "orbitasi", "gravitasi"],
+      "answer": 1,
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "revolusi bumi",
       "kognitif": "C1"
     },
     {
       "id": 6,
       "type": "multiple_choice",
-      "q": "Apabila seseorang mengangkat beban berat, otot yang mengalami kontraksi adalah otot ...",
-      "choices": ["Bisep", "Trisep", "Jantung", "Polos"],
-      "answer": 0,
+      "q": "Akibat dari revolusi Bumi adalah ...",
+      "choices": ["siang dan malam", "perbedaan waktu", "pergantian musim", "pasang surut air laut"],
+      "answer": 2,
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "akibat revolusi bumi",
       "kognitif": "C2"
     },
     {
       "id": 7,
       "type": "multiple_choice",
-      "q": "Perhatikan pernyataan berikut:\n1. Melindungi organ dalam\n2. Tempat pembentukan sel darah\n3. Alat gerak aktif\n4. Memberi bentuk tubuh\nFungsi rangka ditunjukkan oleh nomor ...",
-      "choices": ["1, 2, dan 3", "1, 2, dan 4", "2, 3, dan 4", "1, 3, dan 4"],
-      "answer": 1,
+      "q": "Benda langit yang memancarkan cahaya sendiri disebut ...",
+      "choices": ["planet", "bulan", "bintang", "satelit"],
+      "answer": 2,
       "score": 1,
-      "materi": "alat gerak manusia",
-      "kognitif": "C2"
+      "materi": "bintang",
+      "kognitif": "C1"
     },
     {
       "id": 8,
       "type": "multiple_choice",
-      "q": "Kelainan tulang belakang yang membengkok ke samping disebut ...",
-      "choices": ["Kifosis", "Lordosis", "Skoliosis", "Osteoporosis"],
+      "q": "Bumi mendapatkan cahaya dari bintang ...",
+      "choices": ["Sirius", "Polaris", "Matahari", "Vega"],
       "answer": 2,
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "bintang",
       "kognitif": "C1"
     },
     {
       "id": 9,
       "type": "multiple_choice",
-      "q": "Berikut ini yang merupakan contoh kerja sama antara otot dan rangka adalah ...",
-      "choices": ["Jantung berdetak memompa darah", "Usus mencerna makanan", "Lengan mengangkat buku", "Paru-paru bernapas"],
-      "answer": 2,
+      "q": "Planet adalah benda langit yang ...",
+      "choices": [
+        "memancarkan cahaya sendiri",
+        "mengelilingi bintang",
+        "berekor panjang",
+        "bercahaya di malam hari"
+      ],
+      "answer": 1,
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "planet",
       "kognitif": "C2"
     },
     {
       "id": 10,
       "type": "multiple_choice",
-      "q": "Apabila otot trisep berkontraksi, maka otot bisep akan ...",
-      "choices": ["Berkontraksi juga", "Berelaksasi", "Tetap diam", "Mengalami kram"],
+      "q": "Benda langit kecil berbatu yang mengelilingi Matahari disebut ...",
+      "choices": ["komet", "asteroid", "planet", "satelit"],
       "answer": 1,
       "score": 1,
-      "materi": "alat gerak manusia",
-      "kognitif": "C2"
+      "materi": "asteroid",
+      "kognitif": "C1"
     },
     {
       "id": 11,
       "type": "multiple_choice",
-      "q": "Bangsa Eropa yang pertama kali datang ke Indonesia untuk mencari rempah-rempah adalah ...",
-      "choices": ["Portugis", "Spanyol", "Belanda", "Inggris"],
-      "answer": 0,
+      "q": "Meteoroid yang jatuh ke permukaan Bumi disebut ...",
+      "choices": ["meteor", "asteroid", "meteorit", "komet"],
+      "answer": 2,
       "score": 1,
-      "materi": "kedatangan bangsa asing",
-      "kognitif": "C1"
+      "materi": "meteoroid",
+      "kognitif": "C2"
     },
     {
       "id": 12,
       "type": "multiple_choice",
-      "q": "Perang Diponegoro terjadi pada tahun 1825-1830 melawan penjajah ...",
-      "choices": ["Portugis", "Spanyol", "Belanda", "Jepang"],
-      "answer": 2,
+      "q": "Benda langit yang memiliki ekor dan mengelilingi Matahari disebut ...",
+      "choices": ["asteroid", "komet", "meteor", "planet"],
+      "answer": 1,
       "score": 1,
-      "materi": "perlawanan terhadap bangsa asing",
+      "materi": "komet",
       "kognitif": "C1"
     },
     {
       "id": 13,
       "type": "multiple_choice",
-      "q": "Tuanku Imam Bonjol memimpin Perang Padri melawan Belanda di daerah ...",
-      "choices": ["Jawa", "Sumatera Barat", "Sulawesi", "Maluku"],
-      "answer": 1,
+      "q": "Satelit alami Bumi adalah ...",
+      "choices": ["Matahari", "Mars", "Bulan", "Venus"],
+      "answer": 2,
       "score": 1,
-      "materi": "perlawanan terhadap bangsa asing",
+      "materi": "satelit",
       "kognitif": "C1"
     },
     {
       "id": 14,
       "type": "multiple_choice",
-      "q": "Organisasi Budi Utomo didirikan pada tahun 1908 dengan tujuan utama ...",
-      "choices": ["Mempersiapkan kemerdekaan", "Memajukan pendidikan", "Melawan penjajah secara fisik", "Memperbaiki ekonomi"],
-      "answer": 1,
+      "q": "Contoh satelit buatan adalah ...",
+      "choices": ["Bulan", "Matahari", "Palapa", "Mars"],
+      "answer": 2,
       "score": 1,
-      "materi": "pergerakan nasional",
-      "kognitif": "C1"
+      "materi": "satelit",
+      "kognitif": "C2"
     },
     {
       "id": 15,
       "type": "multiple_choice",
-      "q": "Proklamasi Kemerdekaan Indonesia dibacakan pada tanggal ...",
-      "choices": ["16 Agustus 1945", "17 Agustus 1945", "18 Agustus 1945", "19 Agustus 1945"],
+      "q": "Satu kali rotasi Bumi memerlukan waktu sekitar ...",
+      "choices": ["12 jam", "24 jam", "30 hari", "365 hari"],
       "answer": 1,
       "score": 1,
-      "materi": "pergerakan nasional",
+      "materi": "rotasi bumi",
       "kognitif": "C1"
     },
     {
       "id": 16,
       "type": "multiple_choice",
-      "q": "Benua terbesar di dunia adalah ...",
-      "choices": ["Afrika", "Amerika", "Asia", "Eropa"],
+      "q": "Satu kali revolusi Bumi memerlukan waktu sekitar ...",
+      "choices": ["24 jam", "30 hari", "365 hari", "12 jam"],
       "answer": 2,
       "score": 1,
-      "materi": "enam benua",
+      "materi": "revolusi bumi",
       "kognitif": "C1"
     },
     {
       "id": 17,
       "type": "multiple_choice",
-      "q": "Perhatikan benua-benua berikut:\n1. Asia\n2. Australia\n3. Eropa\n4. Antartika\nBenua yang seluruhnya berada di belahan bumi selatan adalah ...",
-      "choices": ["1 dan 2", "2 dan 3", "2 dan 4", "3 dan 4"],
-      "answer": 2,
+      "q": "Perbedaan waktu di berbagai daerah disebabkan oleh ...",
+      "choices": ["revolusi bumi", "rotasi bumi", "gravitasi", "orbit bulan"],
+      "answer": 1,
       "score": 1,
-      "materi": "enam benua",
+      "materi": "akibat rotasi bumi",
       "kognitif": "C2"
     },
     {
       "id": 18,
       "type": "multiple_choice",
-      "q": "Jika seseorang mengalami patah tulang, proses penyembuhan akan melibatkan pembentukan jaringan tulang baru oleh sel-sel khusus. Proses ini menunjukkan salah satu fungsi tulang yaitu ...",
-      "choices": ["Alat gerak pasif", "Tempat melekatnya otot", "Penyimpan mineral", "Regenerasi dan perbaikan"],
-      "answer": 3,
+      "q": "Planet tempat manusia tinggal adalah ...",
+      "choices": ["Mars", "Venus", "Bumi", "Jupiter"],
+      "answer": 2,
       "score": 1,
-      "materi": "alat gerak manusia",
-      "kognitif": "C3"
+      "materi": "planet",
+      "kognitif": "C1"
     },
     {
       "id": 19,
       "type": "multiple_choice",
-      "q": "Perang Diponegoro dikenal sebagai perang yang sangat menyulitkan Belanda karena menggunakan strategi perang gerilya. Hal ini menunjukkan bahwa Pangeran Diponegoro ...",
-      "choices": ["Memiliki pasukan yang besar", "Menguasai teknologi senjata", "Memahami medan pertempuran", "Bekerja sama dengan penjajah lain"],
+      "q": "Kumpulan benda langit yang terikat oleh gaya gravitasi disebut ...",
+      "choices": ["nebula", "galaksi", "tata surya", "asteroid"],
       "answer": 2,
       "score": 1,
-      "materi": "perlawanan terhadap bangsa asing",
-      "kognitif": "C3"
+      "materi": "tata surya",
+      "kognitif": "C2"
     },
     {
       "id": 20,
       "type": "multiple_choice",
-      "q": "Berdasarkan peta dunia, benua Afrika dan Eropa dipisahkan oleh Laut Mediterania, sedangkan benua Asia dan Afrika dihubungkan oleh Terusan Suez. Hal ini menunjukkan bahwa ...",
-      "choices": ["Benua-benua selalu terpisah oleh laut", "Batas benua dapat berubah oleh manusia", "Setiap benua memiliki iklim berbeda", "Benua Asia adalah benua terluas"],
-      "answer": 1,
+      "q": "Matahari termasuk benda langit jenis ...",
+      "choices": ["planet", "satelit", "bintang", "asteroid"],
+      "answer": 2,
       "score": 1,
-      "materi": "enam benua",
-      "kognitif": "C3"
+      "materi": "bintang",
+      "kognitif": "C1"
     },
+
     {
       "id": 21,
       "type": "fill_blank",
-      "q": "Bagian rangka manusia yang melindungi organ penting seperti jantung dan paru-paru adalah ...",
-      "answer": "tulang rusuk",
-      "acceptable_answers": ["tulang rusuk", "rusuk", "tulang dada dan rusuk", "thorax"],
+      "q": "Gerakan Bumi berputar pada porosnya disebut ...",
+      "answer": "rotasi",
+      "acceptable_answers": ["rotasi"],
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "rotasi bumi",
       "kognitif": "C1"
     },
     {
       "id": 22,
       "type": "fill_blank",
-      "q": "Otot yang menempel pada tulang dan bekerja di bawah kesadaran kita disebut otot ...",
-      "answer": "lurik",
-      "acceptable_answers": ["lurik", "rangka", "serat lintang", "otot lurik"],
+      "q": "Akibat dari rotasi Bumi adalah terjadinya siang dan ...",
+      "answer": "malam",
+      "acceptable_answers": ["malam"],
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "akibat rotasi bumi",
       "kognitif": "C1"
     },
     {
       "id": 23,
       "type": "fill_blank",
-      "q": "Hubungan antar tulang yang memungkinkan terjadinya gerakan disebut ...",
-      "answer": "sendi",
-      "acceptable_answers": ["sendi", "articulatio", "persendian", "sendi tulang"],
+      "q": "Gerakan Bumi mengelilingi Matahari disebut ...",
+      "answer": "revolusi",
+      "acceptable_answers": ["revolusi"],
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "revolusi bumi",
       "kognitif": "C1"
     },
     {
       "id": 24,
       "type": "fill_blank",
-      "q": "Tulang tengkorak termasuk dalam kelompok tulang ... karena bentuknya pipih dan melindungi organ dalam.",
-      "answer": "pipih",
-      "acceptable_answers": ["pipih", "flat", "tulang pipih", "flat bone"],
+      "q": "Pergantian musim terjadi akibat ... Bumi.",
+      "answer": "revolusi",
+      "acceptable_answers": ["revolusi"],
       "score": 1,
-      "materi": "alat gerak manusia",
-      "kognitif": "C1"
+      "materi": "akibat revolusi bumi",
+      "kognitif": "C2"
     },
     {
       "id": 25,
       "type": "fill_blank",
-      "q": "Jepang menjajah Indonesia selama ... tahun sebelum Indonesia merdeka.",
-      "answer": "tiga setengah",
-      "acceptable_answers": ["tiga setengah", "3,5", "3½", "tiga setengah tahun"],
+      "q": "Benda langit yang memancarkan cahaya sendiri disebut ...",
+      "answer": "bintang",
+      "acceptable_answers": ["bintang"],
       "score": 1,
-      "materi": "kedatangan bangsa asing",
+      "materi": "bintang",
       "kognitif": "C1"
     },
     {
       "id": 26,
       "type": "fill_blank",
-      "q": "Perang Diponegoro juga dikenal dengan nama ... karena banyaknya korban jiwa di kedua belah pihak.",
-      "answer": "Perang Jawa",
-      "acceptable_answers": ["Perang Jawa", "Java War", "Perang Diponegoro", "Perang Jawa 1825-1830"],
+      "q": "Planet yang menjadi tempat tinggal manusia adalah ...",
+      "answer": "bumi",
+      "acceptable_answers": ["bumi"],
       "score": 1,
-      "materi": "perlawanan terhadap bangsa asing",
+      "materi": "planet",
       "kognitif": "C1"
     },
     {
       "id": 27,
       "type": "fill_blank",
-      "q": "Budi Utomo didirikan oleh pelajar STOVIA yang dipelopori oleh ...",
-      "answer": "dr. Wahidin Sudirohusodo",
-      "acceptable_answers": ["dr. Wahidin Sudirohusodo", "Wahidin Sudirohusodo", "Dokter Wahidin", "Wahidin"],
+      "q": "Bulan merupakan satelit ... Bumi.",
+      "answer": "alami",
+      "acceptable_answers": ["alami"],
       "score": 1,
-      "materi": "pergerakan nasional",
+      "materi": "satelit",
       "kognitif": "C1"
     },
     {
       "id": 28,
       "type": "fill_blank",
-      "q": "Benua yang dikenal sebagai 'benua hitam' adalah benua ...",
-      "answer": "Afrika",
-      "acceptable_answers": ["Afrika", "Africa", "benua Afrika"],
+      "q": "Benda langit kecil berbatu yang mengelilingi Matahari disebut ...",
+      "answer": "asteroid",
+      "acceptable_answers": ["asteroid"],
       "score": 1,
-      "materi": "enam benua",
+      "materi": "asteroid",
       "kognitif": "C1"
     },
     {
       "id": 29,
       "type": "fill_blank",
-      "q": "Ketika otot bisep berkontraksi untuk mengangkat lengan bawah, maka otot trisep akan mengalami ...",
-      "answer": "relaksasi",
-      "acceptable_answers": ["relaksasi", "berelaksasi", "mengendur", "istirahat"],
+      "q": "Meteoroid yang jatuh ke permukaan Bumi disebut ...",
+      "answer": "meteorit",
+      "acceptable_answers": ["meteorit"],
       "score": 1,
-      "materi": "alat gerak manusia",
+      "materi": "meteoroid",
       "kognitif": "C2"
     },
     {
       "id": 30,
       "type": "fill_blank",
-      "q": "Perang Padri yang dipimpin Tuanku Imam Bonjol awalnya merupakan konflik internal antara kaum adat dan kaum agama, tetapi kemudian berubah menjadi perang melawan ...",
-      "answer": "Belanda",
-      "acceptable_answers": ["Belanda", "penjajah Belanda", "kolonial Belanda", "VOC"],
+      "q": "Komet memiliki ciri khas berupa ...",
+      "answer": "ekor",
+      "acceptable_answers": ["ekor"],
       "score": 1,
-      "materi": "perlawanan terhadap bangsa asing",
-      "kognitif": "C2"
+      "materi": "komet",
+      "kognitif": "C1"
     },
     {
       "id": 31,
-      "type": "essay",
-      "q": "Sebutkan 3 fungsi rangka manusia!",
-      "maxScore": 5,
-      "scoring": {
-        "method": "keyword_based",
-        "keywords": [
-          { "group": "fungsi_rangka", "words": ["penyangga tubuh", "melindungi organ", "tempat otot", "pembentuk tubuh", "pembuat sel darah"], "weight": 1.0 }
-        ],
-        "thresholds": { "excellent": 0.8, "good": 0.6, "fair": 0.4 }
-      },
-      "materi": "alat gerak manusia",
+      "type": "fill_blank",
+      "q": "Satu kali rotasi Bumi memerlukan waktu sekitar ... jam.",
+      "answer": "24",
+      "acceptable_answers": ["24", "dua puluh empat"],
+      "score": 1,
+      "materi": "rotasi bumi",
       "kognitif": "C1"
     },
     {
       "id": 32,
-      "type": "essay",
-      "q": "Sebutkan 4 bangsa asing yang pernah datang ke Indonesia!",
-      "maxScore": 5,
-      "scoring": {
-        "method": "keyword_based",
-        "keywords": [
-          { "group": "bangsa_asing", "words": ["Portugis", "Spanyol", "Belanda", "Inggris", "Jepang"], "weight": 1.0 }
-        ],
-        "thresholds": { "excellent": 0.8, "good": 0.6, "fair": 0.4 }
-      },
-      "materi": "kedatangan bangsa asing",
+      "type": "fill_blank",
+      "q": "Satu kali revolusi Bumi memerlukan waktu sekitar ... hari.",
+      "answer": "365",
+      "acceptable_answers": ["365", "tiga ratus enam puluh lima"],
+      "score": 1,
+      "materi": "revolusi bumi",
       "kognitif": "C1"
     },
     {
       "id": 33,
-      "type": "essay",
-      "q": "Sebutkan 5 nama benua di dunia!",
-      "maxScore": 5,
-      "scoring": {
-        "method": "keyword_based",
-        "keywords": [
-          { "group": "benua", "words": ["Asia", "Afrika", "Amerika", "Eropa", "Australia", "Antartika"], "weight": 1.0 }
-        ],
-        "thresholds": { "excellent": 0.8, "good": 0.6, "fair": 0.4 }
-      },
-      "materi": "enam benua",
-      "kognitif": "C1"
+      "type": "fill_blank",
+      "q": "Matahari adalah pusat dari sistem ...",
+      "answer": "tata surya",
+      "acceptable_answers": ["tata surya"],
+      "score": 1,
+      "materi": "tata surya",
+      "kognitif": "C2"
     },
     {
       "id": 34,
-      "type": "essay",
-      "q": "Siapa yang memimpin Perang Diponegoro dan melawan bangsa mana?",
-      "maxScore": 5,
-      "scoring": {
-        "method": "keyword_based",
-        "keywords": [
-          { "group": "pemimpin", "words": ["Pangeran Diponegoro", "Diponegoro"], "weight": 0.5 },
-          { "group": "lawan", "words": ["Belanda", "penjajah Belanda"], "weight": 0.5 }
-        ],
-        "thresholds": { "excellent": 0.8, "good": 0.6, "fair": 0.4 }
-      },
-      "materi": "perlawanan terhadap bangsa asing",
+      "type": "fill_blank",
+      "q": "Benda langit yang mengelilingi planet disebut ...",
+      "answer": "satelit",
+      "acceptable_answers": ["satelit"],
+      "score": 1,
+      "materi": "satelit",
       "kognitif": "C1"
     },
     {
       "id": 35,
-      "type": "essay",
-      "q": "Pada tanggal berapa Proklamasi Kemerdekaan Indonesia dibacakan?",
-      "maxScore": 5,
-      "scoring": {
-        "method": "keyword_based",
-        "keywords": [
-          { "group": "tanggal", "words": ["17 Agustus 1945", "17-8-1945", "tujuh belas Agustus 1945"], "weight": 1.0 }
-        ],
-        "thresholds": { "excellent": 0.8, "good": 0.6, "fair": 0.4 }
-      },
-      "materi": "pergerakan nasional",
-      "kognitif": "C1"
+      "type": "fill_blank",
+      "q": "Asal-usul Bumi berkaitan dengan pembentukan ... di angkasa.",
+      "answer": "tata surya",
+      "acceptable_answers": ["tata surya"],
+      "score": 1,
+      "materi": "asal usul bumi",
+      "kognitif": "C3"
     }
   ]
 }
