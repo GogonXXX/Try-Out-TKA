@@ -1,0 +1,254 @@
+{
+  "soal": [
+    {
+      "id": 1,
+      "type": "multiple_choice",
+      "q": "Periode sejarah Indonesia yang dimulai sekitar 3000 SM disebut masa ...",
+      "choices": ["praaksara", "klasik", "kolonial", "modern"],
+      "answer": 0,
+      "score": 1,
+      "materi": "periodesasi sejarah",
+      "kognitif": "C1"
+    },
+    {
+      "id": 2,
+      "type": "multiple_choice",
+      "q": "Ciri utama masa praaksara adalah manusia belum mengenal ...",
+      "choices": ["pertanian", "tulisan", "perdagangan", "alat batu"],
+      "answer": 1,
+      "score": 1,
+      "materi": "masa praaksara",
+      "kognitif": "C1"
+    },
+    {
+      "id": 3,
+      "type": "multiple_choice",
+      "q": "Peninggalan masa praaksara berupa bangunan batu besar disebut ...",
+      "choices": ["candi", "menhir", "istana", "prasasti"],
+      "answer": 1,
+      "score": 1,
+      "materi": "peninggalan praaksara",
+      "kognitif": "C1"
+    },
+    {
+      "id": 4,
+      "type": "multiple_choice",
+      "q": "Masa sejarah Indonesia dimulai ketika masyarakat mengenal ...",
+      "choices": ["perdagangan", "pertanian", "tulisan", "logam"],
+      "answer": 2,
+      "score": 1,
+      "materi": "awal sejarah",
+      "kognitif": "C1"
+    },
+    {
+      "id": 5,
+      "type": "multiple_choice",
+      "q": "Kerajaan Hindu-Buddha berkembang di Indonesia pada masa ...",
+      "choices": ["praaksara", "klasik", "kolonial", "pergerakan"],
+      "answer": 1,
+      "score": 1,
+      "materi": "masa klasik",
+      "kognitif": "C1"
+    },
+    {
+      "id": 6,
+      "type": "multiple_choice",
+      "q": "Contoh kerajaan Hindu-Buddha di Indonesia adalah ...",
+      "choices": ["Majapahit", "Demak", "Mataram Islam", "Banten"],
+      "answer": 0,
+      "score": 1,
+      "materi": "kerajaan Hindu-Buddha",
+      "kognitif": "C1"
+    },
+    {
+      "id": 7,
+      "type": "multiple_choice",
+      "q": "Agama Islam mulai berkembang di Indonesia sekitar abad ke ...",
+      "choices": ["1", "7", "13", "18"],
+      "answer": 2,
+      "score": 1,
+      "materi": "masa Islam",
+      "kognitif": "C1"
+    },
+    {
+      "id": 8,
+      "type": "multiple_choice",
+      "q": "Kerajaan Islam pertama di Indonesia adalah ...",
+      "choices": ["Demak", "Aceh", "Samudra Pasai", "Banten"],
+      "answer": 2,
+      "score": 1,
+      "materi": "kerajaan Islam",
+      "kognitif": "C1"
+    },
+    {
+      "id": 9,
+      "type": "multiple_choice",
+      "q": "Bangsa Eropa pertama yang datang ke Indonesia adalah bangsa ...",
+      "choices": ["Inggris", "Belanda", "Spanyol", "Portugis"],
+      "answer": 3,
+      "score": 1,
+      "materi": "awal kolonial",
+      "kognitif": "C1"
+    },
+    {
+      "id": 10,
+      "type": "multiple_choice",
+      "q": "Tujuan utama bangsa Eropa datang ke Indonesia adalah untuk ...",
+      "choices": ["berwisata", "menyebarkan budaya", "mencari rempah-rempah", "belajar bahasa"],
+      "answer": 2,
+      "score": 1,
+      "materi": "kolonialisme",
+      "kognitif": "C1"
+    },
+    {
+      "id": 11,
+      "type": "multiple_choice",
+      "q": "VOC merupakan organisasi dagang milik bangsa ...",
+      "choices": ["Inggris", "Portugis", "Belanda", "Spanyol"],
+      "answer": 2,
+      "score": 1,
+      "materi": "VOC",
+      "kognitif": "C1"
+    },
+    {
+      "id": 12,
+      "type": "multiple_choice",
+      "q": "Masa pergerakan nasional Indonesia ditandai dengan berdirinya organisasi ...",
+      "choices": ["Budi Utomo", "VOC", "KNIP", "PETA"],
+      "answer": 0,
+      "score": 1,
+      "materi": "pergerakan nasional",
+      "kognitif": "C1"
+    },
+    {
+      "id": 13,
+      "type": "multiple_choice",
+      "q": "Indonesia memproklamasikan kemerdekaan pada tahun ...",
+      "choices": ["1942", "1945", "1950", "1965"],
+      "answer": 1,
+      "score": 1,
+      "materi": "kemerdekaan",
+      "kognitif": "C1"
+    },
+    {
+      "id": 14,
+      "type": "multiple_choice",
+      "q": "Warisan budaya yang dapat disentuh dan dilihat disebut warisan budaya ...",
+      "choices": ["tak benda", "lisan", "benda", "adat"],
+      "answer": 2,
+      "score": 1,
+      "materi": "warisan budaya",
+      "kognitif": "C1"
+    },
+    {
+      "id": 15,
+      "type": "multiple_choice",
+      "q": "Contoh warisan budaya benda adalah ...",
+      "choices": ["tari daerah", "lagu daerah", "candi Borobudur", "upacara adat"],
+      "answer": 2,
+      "score": 1,
+      "materi": "warisan budaya benda",
+      "kognitif": "C1"
+    },
+    {
+      "id": 16,
+      "type": "multiple_choice",
+      "q": "Warisan budaya tak benda contohnya adalah ...",
+      "choices": ["rumah adat", "senjata tradisional", "tari tradisional", "arca"],
+      "answer": 2,
+      "score": 1,
+      "materi": "warisan budaya tak benda",
+      "kognitif": "C1"
+    },
+    {
+      "id": 17,
+      "type": "multiple_choice",
+      "q": "Tujuan pelestarian warisan budaya adalah ...",
+      "choices": ["menghilangkan tradisi lama", "menjaga identitas bangsa", "mengganti budaya daerah", "membatasi masyarakat"],
+      "answer": 1,
+      "score": 1,
+      "materi": "pelestarian budaya",
+      "kognitif": "C2"
+    },
+    {
+      "id": 18,
+      "type": "multiple_choice",
+      "q": "Salah satu cara melestarikan budaya daerah adalah ...",
+      "choices": ["tidak mempelajarinya", "mengabaikannya", "mempelajari dan mengenalkannya", "melarang pertunjukan"],
+      "answer": 2,
+      "score": 1,
+      "materi": "pelestarian budaya",
+      "kognitif": "C2"
+    },
+    {
+      "id": 19,
+      "type": "multiple_choice",
+      "q": "Rumah adat merupakan contoh warisan budaya ...",
+      "choices": ["tak benda", "lisan", "benda", "modern"],
+      "answer": 2,
+      "score": 1,
+      "materi": "warisan budaya daerah",
+      "kognitif": "C1"
+    },
+    {
+      "id": 20,
+      "type": "multiple_choice",
+      "q": "Lagu daerah termasuk warisan budaya ...",
+      "choices": ["benda", "tak benda", "bangunan", "sejarah tertulis"],
+      "answer": 1,
+      "score": 1,
+      "materi": "warisan budaya tak benda",
+      "kognitif": "C1"
+    },
+    {
+      "id": 21,
+      "type": "fill_blank",
+      "q": "Masa sebelum manusia mengenal tulisan disebut masa ...",
+      "answer": "praaksara",
+      "acceptable_answers": ["praaksara"],
+      "score": 1,
+      "materi": "masa praaksara",
+      "kognitif": "C1"
+    },
+    {
+      "id": 22,
+      "type": "fill_blank",
+      "q": "Kerajaan Majapahit merupakan kerajaan bercorak agama ...",
+      "answer": "Hindu-Buddha",
+      "acceptable_answers": ["Hindu-Buddha", "Hindu Buddha"],
+      "score": 1,
+      "materi": "masa klasik",
+      "kognitif": "C1"
+    },
+    {
+      "id": 23,
+      "type": "fill_blank",
+      "q": "Bangsa Belanda mendirikan organisasi dagang yang bernama ...",
+      "answer": "VOC",
+      "acceptable_answers": ["VOC"],
+      "score": 1,
+      "materi": "kolonialisme",
+      "kognitif": "C1"
+    },
+    {
+      "id": 24,
+      "type": "fill_blank",
+      "q": "Indonesia merdeka pada tanggal 17 Agustus tahun ...",
+      "answer": "1945",
+      "acceptable_answers": ["1945"],
+      "score": 1,
+      "materi": "kemerdekaan",
+      "kognitif": "C1"
+    },
+    {
+      "id": 25,
+      "type": "fill_blank",
+      "q": "Tari tradisional dan upacara adat termasuk warisan budaya ...",
+      "answer": "tak benda",
+      "acceptable_answers": ["tak benda"],
+      "score": 1,
+      "materi": "warisan budaya",
+      "kognitif": "C1"
+    }
+  ]
+}
