@@ -171,18 +171,52 @@ function render() {
     return;
   }
   
-  if (finished) return;
-  
-  const q = questions[current];
-  let html = `<div class="time">⏳ Sisa: ${Math.floor(timeLeft/60)}:${String(timeLeft%60).padStart(2,'0')}</div>`;
-  html += `<div style="font-size:18px;margin-bottom:20px"><strong>Soal ${current+1}/${questions.length}:</strong> ${q.q}</div>`;
-  
-  if (q.type === 'multiple_choice') {
-    q.choices.forEach((choice, i) => {
-      const isSelected = answers[q.id] === i;
-      html += `<button onclick="selectChoice(${i})" style="display:block;width:100%;margin:8px 0;padding:12px;text-align:left;background:${isSelected?'#e0f2fe':'white'};border:2px solid ${isSelected?'#38bdf8':'#cbd5e1'};border-radius:8px;color:#000000;">${String.fromCharCode(65+i)}. ${choice}</button>`;
-    });
-  }
+if (q.type === 'multiple_choice') {
+  q.choices.forEach((choice, i) => {
+    const isSelected = answers[q.id] === i;
+    html += `
+      <button onclick="selectChoice(${i})"
+        class="answer-btn ${isSelected ? 'active' : ''}">
+        ${String.fromCharCode(65+i)}. ${choice}
+      </button>`;
+  });
+
+} else if (q.type === 'fill_blank') {
+  html += `
+    <div style="margin-top:15px">
+      <input
+        type="text"
+        placeholder="Ketik jawaban di sini..."
+        value="${answers[q.id] || ''}"
+        oninput="answers[${q.id}] = this.value"
+        style="
+          width:100%;
+          padding:12px;
+          font-size:16px;
+          border-radius:8px;
+          border:2px solid #cbd5e1;
+        "
+      />
+    </div>
+  `;
+
+} else if (q.type === 'essay') {
+  html += `
+    <textarea
+      placeholder="Tulis jawaban di sini..."
+      oninput="answers[${q.id}] = this.value"
+      style="
+        width:100%;
+        min-height:120px;
+        padding:12px;
+        font-size:16px;
+        border-radius:8px;
+        border:2px solid #cbd5e1;
+      "
+    >${answers[q.id] || ''}</textarea>
+  `;
+}
+
   
   html += `<div style="margin-top:25px;display:flex;gap:10px">
     <button onclick="goto(${current-1})" ${current===0?'disabled':''}>⬅️</button>
