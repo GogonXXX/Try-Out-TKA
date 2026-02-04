@@ -419,8 +419,8 @@ function loadProgress() {
     console.error('Gagal load progress:', e);
     return false;
   }
-}
-}
+}  // <-- TUTUP FUNGSI loadProgress() DI SINI
+
 function exportJawaban() {
   const nama = document.getElementById('namaSiswa').value.trim() || 'Anonim';
   
@@ -436,7 +436,7 @@ function exportJawaban() {
     } else {
       namaPaket = 'soal';
     }
-  }
+  }  // <-- TAMBAHKAN } YANG HILANG DI SINI
   
   // Data yang akan diekspor
   const data = { 
