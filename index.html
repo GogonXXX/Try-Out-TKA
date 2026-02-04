@@ -149,7 +149,12 @@ function processData(data, fileName) {
   questions = Array.isArray(data) ? data : 
              (Array.isArray(data.soal) ? data.soal : []);
   currentFileName = fileName;
+  
   console.log(`✅ ${questions.length} soal dimuat dari ${fileName}`);
+  
+  // COBA LOAD PROGRESS YANG TERSIMPAN
+  const loaded = loadProgress();
+  
   render();
 }
 
@@ -207,9 +212,23 @@ function render() {
 }
 
 // ==================== FUNGSI NAVIGASI ====================
-function selectChoice(i) { answers[questions[current].id] = i; render(); }
-function toggleMark() { marked[questions[current].id] = !marked[questions[current].id]; render(); }
-function goto(i) { if (i>=0 && i<questions.length) { current = i; render(); } }
+function selectChoice(i) { answers[questions[current].id] = i; render(); saveProgress(); }
+function toggleMark() { marked[questions[current].id] = !marked[questions[current].id]; render(); saveProgress(); }
+function goto(i) { 
+  if (i>=0 && i<questions.length) { 
+    current = i; 
+    render(); 
+    saveProgress(); 
+  }
+}
+function updateFillBlank(v) { 
+  answers[questions[current].id] = v; 
+  saveProgress(); }
+function updateEssay(v) { 
+  answers[questions[current].id] = v; 
+  saveProgress(); }
+
+
 
 // ==================== TIMER ====================
 function startTest() {
@@ -228,6 +247,7 @@ function startTest() {
   }, 1000);
   
   alert(`Ujian dimulai! Nama: ${nama}, Waktu: ${menit} menit`);
+  saveProgress(); // <-- SIMPAN PROGRESS SETELAH START
   render();
 }
 
@@ -235,7 +255,7 @@ function finishTest() {
   if (!confirm('Yakin kumpulkan?')) return;
   clearInterval(timer);
   finished = true;
-  
+  localStorage.removeItem('examProgress');
   let total = 0, max = 0, correctCount = 0;
   questions.forEach(q => {
     const score = q.score || 1;
@@ -309,7 +329,58 @@ function finishTest() {
     </div>
   `;
 }
-
+// Simpan jawaban ke localStorage
+function saveProgress() {
+  const progress = {
+    answers: answers,
+    marked: marked,
+    current: current,
+    timeLeft: timeLeft,
+    started: started,
+    finished: finished,
+    currentFileName: currentFileName,
+    namaSiswa: document.getElementById('namaSiswa').value,
+    setTime: document.getElementById('setTime').value
+  };
+  
+  // SIMPAN KE LOCALSTORAGE
+  localStorage.setItem('examProgress', JSON.stringify(progress));
+}
+// Load jawaban dari localStorage
+function loadProgress() {
+  const saved = localStorage.getItem('examProgress');
+  if (!saved) return false;
+  
+  try {
+    const progress = JSON.parse(saved);
+    
+    // Cek jika paket soal sama
+    if (progress.currentFileName !== currentFileName) {
+      console.log('Paket soal berbeda, reset progress');
+      return false;
+    }
+    
+    answers = progress.answers || {};
+    marked = progress.marked || {};
+    current = progress.current || 0;
+    timeLeft = progress.timeLeft || 0;
+    started = progress.started || false;
+    finished = progress.finished || false;
+    
+    if (progress.namaSiswa) {
+      document.getElementById('namaSiswa').value = progress.namaSiswa;
+    }
+    if (progress.setTime) {
+      document.getElementById('setTime').value = progress.setTime;
+    }
+    
+    console.log('📂 Progress dimuat');
+    return true;
+  } catch (e) {
+    console.error('Gagal load progress:', e);
+    return false;
+  }
+}
 function exportJawaban() {
   const nama = document.getElementById('namaSiswa').value.trim() || 'Anonim';
   
