@@ -239,10 +239,10 @@ function goto(i) {
 }
 function updateFillBlank(v) { 
   answers[questions[current].id] = v; 
-  saveProgress(); }
+  saveProgress();// SIMPAN SETIAP KETIK }
 function updateEssay(v) { 
   answers[questions[current].id] = v; 
-  saveProgress(); }
+  saveProgress(); // SIMPAN SETIAP KETIK }
 function selectMultiple(i) {
   const qid = questions[current].id;
   if (!answers[qid]) answers[qid] = [];
@@ -270,11 +270,12 @@ function startTest() {
   timer = setInterval(() => {
     timeLeft--;
     if (timeLeft <= 0) finishTest();
-    render();
+    // Auto-save setiap 30 detik
+    if (timeLeft % 30 === 0) saveProgress();
   }, 1000);
   
   alert(`Ujian dimulai! Nama: ${nama}, Waktu: ${menit} menit`);
-  saveProgress(); // <-- SIMPAN PROGRESS SETELAH START
+  saveProgress(); // <-- SIMPAN SETELAH START
   render();
 }
 
@@ -378,7 +379,11 @@ function saveProgress() {
     timestamp: Date.now()
   };
   
-  localStorage.setItem(getStorageKey(), JSON.stringify(progress));
+  const key = getStorageKey();
+  localStorage.setItem(key, JSON.stringify(progress));
+  
+  // DEBUG: tampilkan di console
+  console.log('💾 Disimpan:', key, progress);
 }
 // Load jawaban dari localStorage
 function loadProgress() {
