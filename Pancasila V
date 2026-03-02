@@ -1,0 +1,104 @@
+{
+  "soal": [
+    {
+      "id": 1,
+      "type": "multiple_choice",
+      "q": "Makanan khas dari Provinsi Gorontalo adalah ....",
+      "choices": ["Binte Buluhuta", "Sate Madura", "Lawa", "Se’i"],
+      "answer": 0,
+      "score": 1,
+      "materi": "keragaman budaya Indonesia",
+      "kognitif": "C2"
+    },
+    {
+      "id": 2,
+      "type": "multiple_choice",
+      "q": "Parang Salawaku merupakan senjata tradisional dari Provinsi ....",
+      "choices": ["Lampung", "Maluku", "Jawa Timur", "Kalimantan Utara"],
+      "answer": 1,
+      "score": 1,
+      "materi": "keragaman budaya Indonesia",
+      "kognitif": "C3"
+    },
+    {
+      "id": 3,
+      "type": "multiple_choice",
+      "q": "Rumah adat Baloy berasal dari Provinsi ....",
+      "choices": ["Nusa Tenggara Timur", "Maluku", "Kalimantan Utara", "Gorontalo"],
+      "answer": 2,
+      "score": 1,
+      "materi": "keragaman budaya Indonesia",
+      "kognitif": "C2"
+    },
+    {
+      "id": 4,
+      "type": "multiple_choice",
+      "q": "Tari Jaranan merupakan tarian tradisional dari Provinsi ....",
+      "choices": ["Lampung", "Jawa Timur", "Maluku", "Gorontalo"],
+      "answer": 1,
+      "score": 1,
+      "materi": "keragaman budaya Indonesia",
+      "kognitif": "C2"
+    },
+    {
+      "id": 5,
+      "type": "multiple_choice",
+      "q": "Alat musik Sasando berasal dari Provinsi ....",
+      "choices": ["Nusa Tenggara Timur", "Lampung", "Jawa Timur", "Maluku"],
+      "answer": 0,
+      "score": 1,
+      "materi": "keragaman budaya Indonesia",
+      "kognitif": "C3"
+    },
+    {
+      "id": 6,
+      "type": "multiple_choice",
+      "q": "Lagu daerah Rek Ayo Rek berasal dari Provinsi ....",
+      "choices": ["Gorontalo", "Maluku", "Jawa Timur", "Lampung"],
+      "answer": 2,
+      "score": 1,
+      "materi": "keragaman budaya Indonesia",
+      "kognitif": "C2"
+    },
+    {
+      "id": 7,
+      "type": "multiple_choice",
+      "q": "Minuman khas Kopi Malinau berasal dari Provinsi ....",
+      "choices": ["Kalimantan Utara", "Lampung", "Maluku", "Nusa Tenggara Timur"],
+      "answer": 0,
+      "score": 1,
+      "materi": "keragaman budaya Indonesia",
+      "kognitif": "C3"
+    },
+    {
+      "id": 8,
+      "type": "multiple_choice",
+      "q": "Badik Lampung merupakan senjata tradisional dari Provinsi ....",
+      "choices": ["Lampung", "Jawa Timur", "Gorontalo", "Maluku"],
+      "answer": 0,
+      "score": 1,
+      "materi": "keragaman budaya Indonesia",
+      "kognitif": "C2"
+    },
+    {
+      "id": 9,
+      "type": "multiple_choice",
+      "q": "Tari Cakalele berasal dari Provinsi ....",
+      "choices": ["Maluku", "Gorontalo", "Kalimantan Utara", "Lampung"],
+      "answer": 0,
+      "score": 1,
+      "materi": "keragaman budaya Indonesia",
+      "kognitif": "C2"
+    },
+    {
+      "id": 10,
+      "type": "multiple_choice",
+      "q": "Makanan khas Se’i berasal dari Provinsi ....",
+      "choices": ["Jawa Timur", "Nusa Tenggara Timur", "Maluku", "Lampung"],
+      "answer": 1,
+      "score": 1,
+      "materi": "keragaman budaya Indonesia",
+      "kognitif": "C3"
+    }
+  ]
+}
